@@ -1,0 +1,11 @@
+﻿Project:
+
+  Oracle persistent database in docker
+  ✔ add persistent tnsnames in client and environment ubuntu. @started(22-11-30 09:22) @done(22-12-01 07:36) @lasted(22h14m38s)
+  ✔ add task to npm for create oracle schema @done(22-12-01 07:37)
+
+
+  Oracle API in Swagger definition
+  ☐ TODO: debug POST operation @started(22-12-01 07:37)
+  ☐ create mock data
+

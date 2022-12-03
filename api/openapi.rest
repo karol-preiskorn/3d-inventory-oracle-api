@@ -1,0 +1,26 @@
+﻿# TODO: fix device POST
+
+### create device
+
+POST http://localhost:8080/device HTTP/1.1
+content-type: application/json
+
+{
+    "device_id": "sample",
+    "device_name": "device-name-a1",
+    "device_category": "Server"
+}
+
+### get devices
+
+GET http://localhost:8080/devices HTTP/1.1
+content-type: application/json
+
+### get request selected devices
+
+GET http://localhost:8080/device/A-1 HTTP/1.1
+content-type: application/json
+
+
+
+

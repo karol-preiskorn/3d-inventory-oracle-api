@@ -1,0 +1,87 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="0D2FE230-F7C4-F7D6-7D99-5760DE27D005" schemaObject="2E57B3AC-A335-158D-F66B-1F85FCBC80E9" name="ATTRIBUTES">
+<createdBy>karol</createdBy>
+<createdTime>2022-11-01 07:38:50 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<ordsAlias>table_5</ordsAlias>
+<useDDLTransformationScript>true</useDDLTransformationScript>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ATTRIBUTE_TYPE_ID" id="21FC9162-B2B8-127E-6E4A-8F536CD8BD63">
+<createdBy>karol</createdBy>
+<createdTime>2022-11-01 23:34:31 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F72619CB-F2D6-9987-A3B2-74009E6ECD7F" referredColumn="1573A9B6-FC01-B8F4-C7C0-92C8CEC1FD06"/>
+</associations>
+</Column>
+<Column name="DEVICE_ID" id="16424FDD-9A4C-3B8B-B05B-601E32E8CFAF">
+<createdBy>karol</createdBy>
+<createdTime>2022-11-01 23:26:47 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="319A45EC-8DC8-5DD3-9EA5-A9B07F911821" referredColumn="2B154004-7826-C65D-ECA8-38258F5DF47F"/>
+</associations>
+</Column>
+<Column name="ATTRIBUTE_VALUE" id="1380F9A5-F393-5C87-ED91-B4DFD0B8535B">
+<createdBy>karol</createdBy>
+<createdTime>2022-11-01 23:26:47 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="615BC84A-2AB1-7936-FC71-3FBF2F922936" name="ATTRIBUTES_PK">
+<createdBy>karol</createdBy>
+<createdTime>2022-11-01 23:26:47 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="16424FDD-9A4C-3B8B-B05B-601E32E8CFAF"/>
+<colUsage columnID="21FC9162-B2B8-127E-6E4A-8F536CD8BD63"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="61277910-682C-A5F4-82CD-E0BCFF25A324" name="ATTRIBUTES_DEVICES_FK">
+<createdBy>karol</createdBy>
+<createdTime>2022-11-01 23:29:41 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="16424FDD-9A4C-3B8B-B05B-601E32E8CFAF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="EA649693-3BBF-438E-949C-79BC54DA1B5D" name="ATTRIBUTES_ATTRIBUTE_TYPES_FK">
+<createdBy>karol</createdBy>
+<createdTime>2022-11-01 23:57:03 UTC</createdTime>
+<ownerDesignName>model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="21FC9162-B2B8-127E-6E4A-8F536CD8BD63"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
