@@ -9,62 +9,55 @@
 * 2022-11-27  KP   initialize
 */
 
-'use strict';
+'use strict'
 
-var pkg = require("oracledb")
+const oracledb = require("oracledb")
+const { database } = require("./config")
 
-const database = {
-  user: "REST",
-  password: "babilon5",
-  connectString: "172.17.0.2:1521/orclpdb1",
-  poolMin: 10,
-  poolMax: 10,
-  poolIncrement: 0,
-};
-
-const { createPool, getPool, getConnection } = pkg;
+const { createPool, getPool } = oracledb
 
 async function initialize() {
-  await createPool(database);
+  await createPool(database)
 }
 
-module.exports.initialize = initialize;
+module.exports.initialize = initialize
 
 async function close() {
-  await getPool().close();
+  await getPool().close()
 }
 
-module.exports.close = close;
+module.exports.close = close
 
-async function sqlExecute (statement, binds = [], opts = {}){
+function sqlExecute(statement, binds = [], options = {}) {
   return new Promise(async (resolve, reject) => {
-    let conn;
-
-    opts.outFormat = pkg.OUT_FORMAT_OBJECT;
-    opts.autoCommit = true;
-
+    let connection
+    options.outFormat = oracledb.OUT_FORMAT_OBJECT
+    options.autoCommit = true
+    options.extendedMetaData = true
+    options.fetchArraySize = 100
     try {
-      conn = await getConnection();
-      console.log("🔺statement: ", statement);
-      console.log("🔺binds:     ", binds);
-      console.log("🔺opts:      ", opts);
-
-      const result = await conn.execute(statement, binds, opts);
-      console.log("🔺result:    ", result);
-      resolve(result);
+      connection = await oracledb.getConnection()
+      //console.log("🔺sqlExecute.statement: ", statement)
+      //console.log("🔺sqlExecute.binds:     ", binds)
+      //console.log("🔺sqlExecute.opts:      ", options)
+      const result = await connection.execute(statement, binds, options)
+      //console.log("🔺sqlExecute.result:    ", result)
+      // console.log(result.rows);
+      // return { result }
+      resolve(result)
     } catch (err) {
       reject(err);
     } finally {
-      if (conn) {
-        // conn assignment worked, need to close
+      if (connection) {
         try {
-          await conn.close();
+          console.log("sqlExecute.close()")
+          await connection.close()
         } catch (err) {
-          console.log(err);
+          console.log("sqlExecute.error: ", err)
         }
       }
     }
-  });
+  })
 }
 
 module.exports.simpleExecute = sqlExecute;

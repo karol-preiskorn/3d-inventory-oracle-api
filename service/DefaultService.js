@@ -1,6 +1,6 @@
 'use strict'
 
-var device = require('./devices.js');
+var device = require('./devices.js')
 /**
  * Server heartbeat operation. Get information about devices attributes.
  * This operation shows how to override the global security defined above, as we want to open it up for all users.
@@ -59,18 +59,16 @@ exports.deviceDELETE = function () {
  *
  * returns Device
  **/
-exports.deviceGET = function () {
+exports.deviceGET = function (body) {
   return new Promise(function (resolve, reject) {
+    
+    // example response
     var examples = {}
-
     examples['application/json'] = {
-      "device_name": "device_name",
-      "device_id": "device_id",
-      "device_type": "device_type",
-      "device_category": "device_category"
+      "device_name": "tall_turquoise_sheep"
     }
 
-    device.find('{"id": "1"}')
+    device.find(body)
 
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]])
@@ -90,7 +88,7 @@ exports.deviceGET = function () {
  **/
 exports.devicePOST = function (body) {
   return new Promise(function (resolve, reject) {
-    device.create()
+    device.create(body)
     resolve()
   })
 }

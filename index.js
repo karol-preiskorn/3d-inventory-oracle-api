@@ -10,10 +10,13 @@
 */
 
 'use strict';
+var finalhandler = require('finalhandler')
 
 var path = require('path');
 var http = require('http');
+var morgan = require('morgan');
 var database = require("./service/database.js")
+var logger = morgan('combined')
 
 var oas3Tools = require('oas3-tools');
 var serverPort = 8080;
@@ -32,10 +35,9 @@ var app = expressAppConfig.getApp();
 http.createServer(app).listen(serverPort, async function () {
     console.log('Your server is listening on port %d (http://localhost:%d)', serverPort, serverPort);
     console.log('Swagger-ui is available on http://localhost:%d/docs', serverPort);
-    console.log("Starting application");
-
+    console.log("Starting api server application");
     try {
-      console.log("Initializing database module");
+      console.log("Initializing Oracle database module");
       await database.initialize();
     } catch (err) {
       console.error(err);

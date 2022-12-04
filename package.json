@@ -1,12 +1,12 @@
 {
   "name": "api-for-ultimainventory",
   "version": "1.0.2",
-  "description": "Run CRUD od Device object on Node Express.",
+  "description": "Run CRUD operation for UltimaInventory schema by Node Express server.",
   "main": "index.js",
   "scripts": {
     "install": "npm install",
     "start": "node index.js",
-    "nodemon": "nodemon index.js",
+    "nodemon": "nodemon --ext yaml,js,mjs,json --experimental-specifier-resolution=node index.js",
     "docs": "documentation build ./index.js ./service/** ./controllers/** ./api/** --github -o docs/index.html",
     "db-set-password": "docker exec -d `docker ps --format \"{{.ID}}\"` ./setPassword.sh babilon5",
     "db-create-user": "sqlplus sys/babilon5@172.17.0.2:1521/orclpdb1 as sysdba @sql/create-user.sql",
@@ -14,23 +14,30 @@
     "db": "npm run db-set-password && npm run create-user && npm run create-schema"
   },
   "keywords": [
-    "swagger"
+    "swagger",
+    "api",
+    "nodejs"
   ],
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "@types/oracledb": "^5.2.3",
+    "@typescript-eslint/parser": "^5.45.0",
     "body-parser": "^1.20.1",
     "chance": "^1.1.9",
     "connect": "^3.7.0",
-    "documentation": "^14.0.0",
+    "documentation": "^3.0.4",
     "js-yaml": "^4.1.0",
-    "morgan": "^1.10.0",
     "nodemon": "^2.0.20",
     "oas3-tools": "^2.2.3",
     "oracledb": "^5.5.0",
+    "prettier": "^2.8.0",
+    "typescript": "^4.9.3",
     "unique-names-generator": "^4.7.1"
   },
   "devDependencies": {
-    "@types/chance": "^1.1.3"
+    "@types/chance": "^1.1.3",
+    "@types/prettier": "^2.7.1",
+    "eslint": "^8.29.0"
   }
 }
