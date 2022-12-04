@@ -26,7 +26,7 @@
     "body-parser": "^1.20.1",
     "chance": "^1.1.9",
     "connect": "^3.7.0",
-    "documentation": "^3.0.4",
+    "documentation": "^14.0.0",
     "js-yaml": "^4.1.0",
     "nodemon": "^2.0.20",
     "oas3-tools": "^2.2.3",
