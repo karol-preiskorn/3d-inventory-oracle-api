@@ -61,7 +61,7 @@ exports.deviceDELETE = function () {
  **/
 exports.deviceGET = function (body) {
   return new Promise(function (resolve, reject) {
-    
+
     // example response
     var examples = {}
     examples['application/json'] = {
@@ -88,8 +88,14 @@ exports.deviceGET = function (body) {
  **/
 exports.devicePOST = function (body) {
   return new Promise(function (resolve, reject) {
-    device.create(body)
-    resolve()
+    try {
+      const result = device.create(body)
+      console.log("✅ Result in devicePOST:", result)
+      resolve(result)
+    } catch (err) {
+      console.log("🔥 Error in devicePOST:", err)
+      reject(err)
+    }
   })
 }
 

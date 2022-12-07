@@ -6,6 +6,6 @@
 
 
   Oracle API in Swagger definition
-  ☐ TODO: debug POST operation @started(22-12-01 07:37)
+  ☐ TODO: debug POST operation, problem understanding all aspect call promise/resolve/reject @started(22-12-01 07:37)
   ☐ create mock data
 

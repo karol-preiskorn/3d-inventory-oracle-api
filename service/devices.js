@@ -1,6 +1,4 @@
-{
-	"knownSymbols": {}
-}/*
+/*
  * File:        /service/devices.js
  * Description: execute SQLs on database
  * Used by:
@@ -115,9 +113,13 @@ exports.find = function (context) {
     console.log("👀 device.get.query: ", query)
     console.log("👀 device.get.binds: ", binds)
 
-    const result = simpleExecute.simpleExecute(query, binds)
-
-    resolve(result.rows)
+    try {
+      const result = simpleExecute.simpleExecute(query, binds)
+      resolve(result)
+    } catch (err) {
+      console.log("🐛 Error in simpleExecute:", err)
+      reject(err)
+    }
   })
 }
 
@@ -129,7 +131,7 @@ const createSql = `insert into devices (device_id, device_name, device_category,
 exports.create = async function (Device) {
   return new Promise(async function (resolve, reject) {
     try {
-      const deviceContext = Object.assign({}, Device)
+      let deviceContext = Object.assign({}, Device)
       if (Device.length == 0) {
         const randomName = uniqueNamesGenerator({
           dictionaries: [adjectives, colors, animals],
@@ -143,7 +145,7 @@ exports.create = async function (Device) {
         var randomDeviceCategory =
           DeviceCategory[Math.floor(Math.random() * DeviceCategory.length)]
 
-        // console.log("👀 device.post.contex: ", deviceContext)
+        // console.log("👀 device.post.context: ", deviceContext)
 
         const device = {
           device_id: {
@@ -168,8 +170,9 @@ exports.create = async function (Device) {
           },
         }
       } else {
+        
         // TODO: attach values from body to binds
-        //console.log("👀 device.post.contex(values): ", deviceContext)
+        //console.log("👀 device.post.context(values): ", deviceContext)
 
         const device = {
           device_id: {
@@ -193,8 +196,8 @@ exports.create = async function (Device) {
             val: deviceContext.device_type,
           },
         }
-        const result = await simpleExecute.simpleExecute(createSql, device)
-
+        deviceContext = device
+        const result = await simpleExecute.simpleExecute(createSql, deviceContext)
         resolve(result)
       }
     } catch (err) {

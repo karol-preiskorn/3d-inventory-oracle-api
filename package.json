@@ -1,7 +1,7 @@
 {
   "name": "api-for-ultimainventory",
   "version": "1.0.2",
-  "description": "Run CRUD operation for UltimaInventory schema by Node Express server.",
+  "description": "Run CRUD operation for ultimaInventory schema by Node Express server.",
   "main": "index.js",
   "scripts": {
     "install": "npm install",
@@ -11,7 +11,7 @@
     "db-set-password": "docker exec -d `docker ps --format \"{{.ID}}\"` ./setPassword.sh babilon5",
     "db-create-user": "sqlplus sys/babilon5@172.17.0.2:1521/orclpdb1 as sysdba @sql/create-user.sql",
     "db-create-schema": "sqlplus REST/babilon5@172.17.0.2:1521/orclpdb1 @sql/create-schema.sql",
-    "db": "npm run db-set-password && npm run create-user && npm run create-schema"
+    "db": "npm run db-set-password && npm run db-create-user && npm run db-create-schema"
   },
   "keywords": [
     "swagger",
@@ -26,7 +26,7 @@
     "body-parser": "^1.20.1",
     "chance": "^1.1.9",
     "connect": "^3.7.0",
-    "documentation": "^3.0.4",
+    "documentation": "^14.0.0",
     "js-yaml": "^4.1.0",
     "nodemon": "^2.0.20",
     "oas3-tools": "^2.2.3",
