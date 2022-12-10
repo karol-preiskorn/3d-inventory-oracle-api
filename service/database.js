@@ -11,32 +11,34 @@
 
 'use strict'
 
-const oracledb = require("oracledb")
-const { database } = require("./config")
+import OracleDB from 'oracledb'
+import { database19g, database21g } from "./config.js"
 
-const { createPool, getPool } = oracledb
+// const { createPool, getPool } = oracledb
 
 async function initialize() {
-  await createPool(database)
+  OracleDB.createPool(database21g)
 }
 
-module.exports.initialize = initialize
+const _initialize = initialize
+export { _initialize as initialize }
 
 async function close() {
-  await getPool().close()
+  await OracleDB.getPool().close()
 }
 
-module.exports.close = close
+const _close = close
+export { _close as close }
 
 function sqlExecute(statement, binds = [], options = {}) {
   return new Promise(async (resolve, reject) => {
     let connection
-    options.outFormat = oracledb.OUT_FORMAT_OBJECT
+    options.outFormat = OUT_FORMAT_OBJECT
     options.autoCommit = true
     options.extendedMetaData = true
     options.fetchArraySize = 100
     try {
-      connection = await oracledb.getConnection()
+      connection = await getConnection()
       //console.log("🔺sqlExecute.statement: ", statement)
       //console.log("🔺sqlExecute.binds:     ", binds)
       //console.log("🔺sqlExecute.opts:      ", options)
@@ -60,5 +62,5 @@ function sqlExecute(statement, binds = [], options = {}) {
   })
 }
 
-module.exports.simpleExecute = sqlExecute;
+export const simpleExecute = sqlExecute;
 

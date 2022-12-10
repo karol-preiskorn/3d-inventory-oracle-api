@@ -1,0 +1,26 @@
+{
+  "name": "api-for-ultimainventory",
+  "version": "1.0.2",
+  "description": "Run CRUD od Device object on Node Express.",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "npm install",
+    "nodemon": "nodemon --ext yaml,js,mjs,json,rest,ts --experimental-specifier-resolution=node ./index.js"
+  },
+  "keywords": [
+    "swagger"
+  ],
+  "license": "Unlicense",
+  "private": true,
+  "dependencies": {
+    "connect": "^3.7.0",
+    "js-yaml": "^4.1.0",
+    "oas3-tools": "^2.2.3",
+    "oracledb": "^5.5.0",
+    "prettier": "^2.8.1"
+  },
+  "devDependencies": {
+    "@types/oracledb": "^5.2.3",
+    "eslint": "^8.29.0"
+  }
+}

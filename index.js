@@ -10,16 +10,21 @@
 */
 
 'use strict';
-var finalhandler = require('finalhandler')
 
-var path = require('path');
-var http = require('http');
-var morgan = require('morgan');
-var database = require("./service/database.js")
-var logger = morgan('combined')
+import path from 'path';
+import url from 'url';
 
-var oas3Tools = require('oas3-tools');
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+console.log(__filename);
+console.log(__dirname);
+
+import { createServer } from 'http'
+import { initialize } from "./service/database.js"
+import { expressAppConfig } from 'oas3-tools'
 var serverPort = 8080;
+
 
 // swaggerRouter configuration
 var options = {
@@ -28,17 +33,17 @@ var options = {
     },
 };
 
-var expressAppConfig = oas3Tools.expressAppConfig(path.join(__dirname, 'api/openapi.yaml'), options);
-var app = expressAppConfig.getApp();
+var _expressAppConfig = expressAppConfig(path.join(__dirname, 'api/openapi.yaml'), options);
+var app = _expressAppConfig.getApp();
 
 // Initialize the Swagger middleware
-http.createServer(app).listen(serverPort, async function () {
+createServer(app).listen(serverPort, async function () {
     console.log('Your server is listening on port %d (http://localhost:%d)', serverPort, serverPort);
     console.log('Swagger-ui is available on http://localhost:%d/docs', serverPort);
     console.log("Starting api server application");
     try {
       console.log("Initializing Oracle database module");
-      await database.initialize();
+      await initialize();
     } catch (err) {
       console.error(err);
       process.exit(1); // Non-zero failure code

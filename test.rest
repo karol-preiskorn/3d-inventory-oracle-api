@@ -1,0 +1,23 @@
+﻿###
+
+GET http://localhost:8080/docs HTTP/1.1
+
+###
+
+GET http://localhost:8080/device HTTP/1.1
+
+###
+
+GET http://localhost:8080/device/1 HTTP/1.1
+
+###
+
+POST http://localhost:8080/device HTTP/1.1
+content-type: application/json
+
+{
+    "device_id": "sample-id-6",
+    "device_name": "sample",
+    "device_category": "test-categoty-1",
+    "device_type": "type-1"
+}

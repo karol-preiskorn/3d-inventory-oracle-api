@@ -1,13 +1,14 @@
 'use strict'
 
-var device = require('./devices.js')
+const { find, create } = require('./devices.js')
+
 /**
  * Server heartbeat operation. Get information about devices attributes.
  * This operation shows how to override the global security defined above, as we want to open it up for all users.
  *
  * no response value expected for this operation
  **/
-exports.attributesGET = function () {
+export function attributesGET() {
   return new Promise(function (resolve, reject) {
     resolve()
   })
@@ -20,7 +21,7 @@ exports.attributesGET = function () {
  *
  * no response value expected for this operation
  **/
-exports.attributes_typesGET = function () {
+export function attributes_typesGET() {
   return new Promise(function (resolve, reject) {
     resolve()
   })
@@ -33,7 +34,7 @@ exports.attributes_typesGET = function () {
  *
  * no response value expected for this operation
  **/
-exports.connectionsGET = function () {
+export function connectionsGET() {
   return new Promise(function (resolve, reject) {
     resolve()
   })
@@ -46,7 +47,7 @@ exports.connectionsGET = function () {
  *
  * no response value expected for this operation
  **/
-exports.deviceDELETE = function () {
+export function deviceDELETE() {
   return new Promise(function (resolve, reject) {
     resolve()
   })
@@ -59,7 +60,7 @@ exports.deviceDELETE = function () {
  *
  * returns Device
  **/
-exports.deviceGET = function (body) {
+export function deviceGET(body) {
   return new Promise(function (resolve, reject) {
 
     // example response
@@ -68,7 +69,7 @@ exports.deviceGET = function (body) {
       "device_name": "tall_turquoise_sheep"
     }
 
-    device.find(body)
+    find(body)
 
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]])
@@ -86,10 +87,11 @@ exports.deviceGET = function (body) {
  * body Device
  * no response value expected for this operation
  **/
-exports.devicePOST = function (body) {
+export function devicePOST(body) {
   return new Promise(function (resolve, reject) {
     try {
-      const result = device.create(body)
+      console.log("✅ before devicePOST:", body)
+      const result = create(body)
       console.log("✅ Result in devicePOST:", result)
       resolve(result)
     } catch (err) {
@@ -106,7 +108,7 @@ exports.devicePOST = function (body) {
  *
  * no response value expected for this operation
  **/
-exports.devicePUT = function () {
+export function devicePUT() {
   return new Promise(function (resolve, reject) {
     resolve()
   })

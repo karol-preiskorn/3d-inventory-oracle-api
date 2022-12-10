@@ -1,7 +1,7 @@
 {
   "name": "api-for-ultimainventory",
-  "version": "1.0.2",
-  "description": "Run CRUD operation for ultimaInventory schema by Node Express server.",
+  "version": "2.0.1",
+  "description": "Run CRUD on Oracle DB. API operation for ultimaInventory schema by Node Express server.",
   "main": "index.js",
   "scripts": {
     "install": "npm install",
@@ -9,20 +9,18 @@
     "nodemon": "nodemon --ext yaml,js,mjs,json --experimental-specifier-resolution=node index.js",
     "docs": "documentation build ./index.js ./service/** ./controllers/** ./api/** --github -o docs/index.html",
     "db-set-password": "docker exec -d `docker ps --format \"{{.ID}}\"` ./setPassword.sh babilon5",
-    "db-create-user": "sqlplus sys/babilon5@172.17.0.2:1521/orclpdb1 as sysdba @sql/create-user.sql",
-    "db-create-schema": "sqlplus REST/babilon5@172.17.0.2:1521/orclpdb1 @sql/create-schema.sql",
-    "db": "npm run db-set-password && npm run db-create-user && npm run db-create-schema"
+    "db-create-user-19g": "sqlplus sys/babilon5@172.17.0.2:1521/orclpdb1 as sysdba @sql/create-user.sql",
+    "db-create-schema-19g": "sqlplus REST/babilon5@172.17.0.2:1521/orclpdb1 @sql/create-schema.sql",
+    "db-create-user-21g": "sqlplus sys/babilon5@172.17.0.2:1521/XEPDB1 as sysdba @sql/create-user.sql",
+    "db-create-schema-21g": "sqlplus REST/babilon5@172.17.0.2:1521/XEPDB1 @sql/create-schema.sql",
+    "db": "npm run db-set-password && npm run db-create-user && npm run db-create-schema",
+    "swagger-get": "wget https://oss.sonatype.org/content/repositories/releases/io/swagger/swagger-codegen-cli/2.4.29/swagger-codegen-cli-2.4.29.jar ./api",
+    "swagger3-generate": "java -jar ./api/swagger-codegen-cli-3.0.36.jar generate -i ./api/openapi.yaml -l nodejs-server -o ./src"
   },
-  "keywords": [
-    "swagger",
-    "api",
-    "nodejs"
-  ],
-  "license": "MIT",
+  "license": "ultimasolution.pl",
   "private": true,
   "dependencies": {
-    "@types/oracledb": "^5.2.3",
-    "@typescript-eslint/parser": "^5.45.0",
+    "api-spec-converter": "^2.12.0",
     "body-parser": "^1.20.1",
     "chance": "^1.1.9",
     "connect": "^3.7.0",
@@ -31,13 +29,12 @@
     "nodemon": "^2.0.20",
     "oas3-tools": "^2.2.3",
     "oracledb": "^5.5.0",
-    "prettier": "^2.8.0",
-    "typescript": "^4.9.3",
-    "unique-names-generator": "^4.7.1"
+    "path": "^0.12.7",
+    "prettier": "^2.8.1",
+    "unique-names-generator": "^4.7.1",
+    "url": "^0.11.0"
   },
   "devDependencies": {
-    "@types/chance": "^1.1.3",
-    "@types/prettier": "^2.7.1",
     "eslint": "^8.29.0"
   }
 }

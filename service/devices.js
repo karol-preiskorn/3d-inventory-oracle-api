@@ -170,7 +170,7 @@ exports.create = async function (Device) {
           },
         }
       } else {
-        
+
         // TODO: attach values from body to binds
         //console.log("👀 device.post.context(values): ", deviceContext)
 

@@ -1,0 +1,160 @@
+openapi: 3.0.2
+info:
+  title: API for UltimaInventory
+  description: Run CRUD od Device object on Node Express.
+  version: 1.0.2
+servers:
+- url: http://localhost:8080
+  description: Ultima Inventory API
+paths:
+  /device:
+    get:
+      summary: Get Device Id
+      description: Get information about devices.
+      operationId: deviceGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+              examples:
+                device_id:
+                  value: tall_turquoise_sheep
+      x-swagger-router-controller: Default
+    put:
+      summary: Insert new device
+      description: Create device.
+      operationId: devicePUT
+      responses:
+        "200":
+          description: OK
+      x-swagger-router-controller: Default
+    post:
+      summary: Insert new device
+      description: Create device.
+      operationId: devicePOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Device'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+              example: null
+        "500":
+          description: Error device not created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+              example: null
+      x-swagger-router-controller: Default
+    delete:
+      summary: Insert new device
+      description: Create device.
+      operationId: deviceDELETE
+      responses:
+        "200":
+          description: OK
+      x-swagger-router-controller: Default
+  /connections:
+    get:
+      summary: Server heartbeat operation. Get information about connection between
+        Devices.
+      description: "This operation shows how to override the global security defined\
+        \ above, as we want to open it up for all users."
+      operationId: connectionsGET
+      responses:
+        "200":
+          description: OK
+      security: []
+      x-swagger-router-controller: Default
+  /attributes:
+    get:
+      summary: Server heartbeat operation. Get information about devices attributes.
+      description: "This operation shows how to override the global security defined\
+        \ above, as we want to open it up for all users."
+      operationId: attributesGET
+      responses:
+        "200":
+          description: OK
+      security: []
+      x-swagger-router-controller: Default
+  /attributes_types:
+    get:
+      summary: Server heartbeat operation. Get information about devices attributes
+        types.
+      description: "This operation shows how to override the global security defined\
+        \ above, as we want to open it up for all users."
+      operationId: attributes_typesGET
+      responses:
+        "200":
+          description: OK
+      security: []
+      x-swagger-router-controller: Default
+components:
+  schemas:
+    Device:
+      required:
+      - device_id
+      - device_name
+      type: object
+      properties:
+        device_id:
+          type: string
+        device_name:
+          type: string
+        device_category:
+          type: string
+        device_type:
+          type: string
+      example:
+        device_name: device-A1
+        device_id: 91601de6-6e93-11ed-a1eb-0242ac120002
+        device_type: Server
+        device_category: Network
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      example:
+        code: "404"
+        message: Error app not work...
+  responses:
+    "200":
+      description: OK
+    "400":
+      description: Bad request. User ID must be an integer and larger than 0.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    "401":
+      description: Authorization information is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    "404":
+      description: A user with the specified ID was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    "5XX":
+      description: Unexpected error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

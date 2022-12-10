@@ -9,9 +9,16 @@
 * 2022-11-27  KP   initialize
 */
 
-'use strict'
+export const database21g = {
+  user: "REST",
+  password: "babilon5",
+  connectString: "172.17.0.2:1521/XEPDB1",
+  poolMin: 10,
+  poolMax: 10,
+  poolIncrement: 0,
+}
 
-const database = {
+export const database19g = {
   user: "REST",
   password: "babilon5",
   connectString: "172.17.0.2:1521/orclpdb1",
@@ -19,4 +26,5 @@ const database = {
   poolMax: 10,
   poolIncrement: 0,
 }
-exports.database = database
+
+export default { database19g, database21g }
