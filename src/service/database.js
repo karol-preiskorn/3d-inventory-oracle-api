@@ -3,6 +3,7 @@
 * Description:
 * Used by:
 * Dependency:
+*
 * HISTORY:
 * Date        By   Comments
 * ----------  ---  ---------------------------------------------------------
@@ -12,10 +13,10 @@
 'use strict'
 
 const oracledb = require('oracledb')
-const dbConfig = require("./config.js")
+const dbConfig = require("./dbConfig.js")
 
 async function initialize() {
-  oracledb.createPool(database21g)
+  oracledb.createPool(dbConfig.dbConfig)
 }
 
 async function close() {
@@ -23,14 +24,14 @@ async function close() {
 }
 
 exports.sqlExecute = function(statement, binds = [], options = {}) {
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async (resolve, reject, next) => {
     let connection
     options.outFormat = oracledb.OUT_FORMAT_OBJECT
     options.autoCommit = true
     options.extendedMetaData = true
     options.fetchArraySize = 100
     try {
-      connection = await oracledb.getConnection(dbConfig.database21g)
+      connection = await oracledb.getConnection(dbConfig.dbConfig)
       //console.log("🔺sqlExecute.statement: ", statement)
       //console.log("🔺sqlExecute.binds:     ", binds)
       //console.log("🔺sqlExecute.opts:      ", options)
@@ -40,7 +41,8 @@ exports.sqlExecute = function(statement, binds = [], options = {}) {
       // return { result }
       resolve(result)
     } catch (err) {
-      reject(err);
+      console.log('🐛Reject: ', err)
+      resolve(err)
     } finally {
       if (connection) {
         try {
@@ -53,6 +55,4 @@ exports.sqlExecute = function(statement, binds = [], options = {}) {
     }
   })
 }
-
-//module.exports = { sqlExecute }
 

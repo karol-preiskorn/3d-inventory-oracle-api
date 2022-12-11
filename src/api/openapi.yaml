@@ -48,14 +48,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
-              example: null
+              example:
+                $ref: '#/components/schemas/Error'
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+              example:
+                $ref: '#/components/schemas/Device/example'
+          default:
+            description: Unexpected error
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ErrorModel'
         "500":
           description: Error device not created
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
-              example: null
+              example:
+                $ref: '#/components/schemas/Error'
       x-swagger-router-controller: Default
     delete:
       summary: Insert new device
@@ -69,8 +85,7 @@ paths:
     get:
       summary: Server heartbeat operation. Get information about connection between
         Devices.
-      description: "This operation shows how to override the global security defined\
-        \ above, as we want to open it up for all users."
+      description: "This operation shows how to override the global security defined above, as we want to open it up for all users."
       operationId: connectionsGET
       responses:
         "200":
@@ -80,8 +95,7 @@ paths:
   /attributes:
     get:
       summary: Server heartbeat operation. Get information about devices attributes.
-      description: "This operation shows how to override the global security defined\
-        \ above, as we want to open it up for all users."
+      description: "This operation shows how to override the global security defined above, as we want to open it up for all users."
       operationId: attributesGET
       responses:
         "200":
@@ -90,10 +104,8 @@ paths:
       x-swagger-router-controller: Default
   /attributes_types:
     get:
-      summary: Server heartbeat operation. Get information about devices attributes
-        types.
-      description: "This operation shows how to override the global security defined\
-        \ above, as we want to open it up for all users."
+      summary: Server heartbeat operation. Get information about devices attributes types.
+      description: "This operation shows how to override the global security defined above, as we want to open it up for all users."
       operationId: attributes_typesGET
       responses:
         "200":
@@ -130,30 +142,30 @@ components:
           type: string
       example:
         code: "404"
-        message: Error app not work...
+        message: "Error example app not work..."
   responses:
     "200":
       description: OK
     "400":
-      description: Bad request. User ID must be an integer and larger than 0.
+      description: "Bad request. User ID must be an integer and larger than 0."
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
     "401":
-      description: Authorization information is missing or invalid.
+      description: "Authorization information is missing or invalid."
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
     "404":
-      description: A user with the specified ID was not found.
+      description: "A user with the specified ID was not found."
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
     "5XX":
-      description: Unexpected error.
+      description: "Unexpected error"
       content:
         application/json:
           schema:

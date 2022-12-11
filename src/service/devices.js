@@ -67,9 +67,8 @@ var DeviceCategory = [
   },
 ]
 
-const { BIND_OUT, BIND_IN, DB_TYPE_VARCHAR } = require("oracledb")
-
-const simpleExecute = require("./database.js")
+const oracledb = require("oracledb")
+const datatabase = require("./database.js")
 
 const baseQuery = `select device_id, device_name, device_category, device_type from devices`
 
@@ -86,23 +85,23 @@ exports.find = function (context) {
     let query = baseQuery
     const binds = {
       device_id: {
-        dir: BIND_IN,
-        type: DB_TYPE_VARCHAR,
+        dir: oracledb.BIND_IN,
+        type: oracledb.DB_TYPE_VARCHAR,
         val: context.device_id,
       },
       device_name: {
-        dir: BIND_IN,
-        type: DB_TYPE_VARCHAR,
+        dir: oracledb.BIND_IN,
+        type: oracledb.DB_TYPE_VARCHAR,
         val: context.device_name,
       },
       device_category: {
-        dir: BIND_IN,
-        type: DB_TYPE_VARCHAR,
+        dir: oracledb.BIND_IN,
+        type: oracledb.DB_TYPE_VARCHAR,
         val: context.device_category,
       },
       device_type: {
-        dir: BIND_IN,
-        type: DB_TYPE_VARCHAR,
+        dir: oracledb.BIND_IN,
+        type: oracledb.DB_TYPE_VARCHAR,
         val: context.device_type,
       },
     }
@@ -112,11 +111,10 @@ exports.find = function (context) {
       query += " where device_id = :device_id"
     }
 
-    console.log("👀 device.get.query: ", query)
-    console.log("👀 device.get.binds: ", binds)
-
     try {
-      const result = simpleExecute.simpleExecute(query, binds)
+      console.log("👀 device.get.query: ", query)
+      console.log("👀 device.get.binds: ", binds)
+      const result = datatabase.sqlExecute(query, binds)
       resolve(result)
     } catch (err) {
       console.log("🐛 Error in simpleExecute:", err)
@@ -134,6 +132,7 @@ exports.create = async function (Device) {
   return new Promise(async function (resolve, reject) {
     try {
       let deviceContext = Object.assign({}, Device)
+
       if (Device.length == 0) {
         const randomName = uniqueNamesGenerator({
           dictionaries: [adjectives, colors, animals],
@@ -147,63 +146,60 @@ exports.create = async function (Device) {
         var randomDeviceCategory =
           DeviceCategory[Math.floor(Math.random() * DeviceCategory.length)]
 
-        // console.log("👀 device.post.context: ", deviceContext)
-
         const device = {
           device_id: {
-            dir: BIND_IN,
-            type: DB_TYPE_VARCHAR,
+            dir: oracledb.BIND_IN,
+            type: oracledb.DB_TYPE_VARCHAR,
             val: randomName,
           },
           device_name: {
-            dir: BIND_IN,
-            type: DB_TYPE_VARCHAR,
+            dir: oracledb.BIND_IN,
+            type: oracledb.DB_TYPE_VARCHAR,
             val: shortName,
           },
           device_category: {
-            dir: BIND_IN,
-            type: DB_TYPE_VARCHAR,
+            dir: oracledb.BIND_IN,
+            type: oracledb.DB_TYPE_VARCHAR,
             val: randomDeviceCategory.Category,
           },
           device_type: {
-            dir: BIND_IN,
-            type: DB_TYPE_VARCHAR,
+            dir: oracledb.BIND_IN,
+            type: oracledb.DB_TYPE_VARCHAR,
             val: randomDeviceTypes,
           },
         }
       } else {
-
-        // TODO: attach values from body to binds
-        //console.log("👀 device.post.context(values): ", deviceContext)
-
         const device = {
           device_id: {
-            dir: BIND_IN,
-            type: DB_TYPE_VARCHAR,
+            dir: oracledb.BIND_IN,
+            type: oracledb.DB_TYPE_VARCHAR,
             val: deviceContext.device_id,
           },
           device_name: {
-            dir: BIND_IN,
-            type: DB_TYPE_VARCHAR,
+            dir: oracledb.BIND_IN,
+            type: oracledb.DB_TYPE_VARCHAR,
             val: deviceContext.device_name,
           },
           device_category: {
-            dir: BIND_IN,
-            type: DB_TYPE_VARCHAR,
+            dir: oracledb.BIND_IN,
+            type: oracledb.DB_TYPE_VARCHAR,
             val: deviceContext.device_category,
           },
           device_type: {
-            dir: BIND_IN,
-            type: DB_TYPE_VARCHAR,
+            dir: oracledb.BIND_IN,
+            type: oracledb.DB_TYPE_VARCHAR,
             val: deviceContext.device_type,
           },
         }
         deviceContext = device
-        const result = await simpleExecute.sqlExecute(createSql, deviceContext)
+        console.log("👀 device.create.query: ", createSql)
+        console.log("👀 device.create.binds: ", deviceContext)
+        const result = await datatabase.sqlExecute(createSql, deviceContext)
+        //console.log("👀 device.create.result: ", result)
         resolve(result)
       }
     } catch (err) {
-      console.log("🐛 Error in simpleExecute:", err)
+      console.log("🐛 Reject(Error) in sqlExecute:", err)
       reject(err)
     }
   })

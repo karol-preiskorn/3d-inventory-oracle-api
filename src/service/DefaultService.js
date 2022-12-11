@@ -94,16 +94,19 @@ exports.devicePOST = function (body) {
     //   "device_type": "Server",
     //   "device_category": "Network"
     // }
-    console.log("👀 post: ", body)
-
-    ret = devices.create(body)
-
-    if (ret.length > 0) {
-      console.log("👀 post.return: ", ret)
-      resolve(ret)
-    } else {
-      console.log("👀 post.return: ", ret)
-      reject(ret)
+    try {
+      console.log("👀 post: ", body)
+      const result = devices.create(body)
+      if (result.length > 0) {
+        console.log("👀 devicePOST.return.resolve: ", result)
+        resolve(result)
+      } else {
+        console.log("🔥 devicePOST.return.reject: ", result)
+        reject(result)
+      }
+    } catch (err) {
+      console.log("🔥 devicePOST.return.catch: ", err)
+      reject(err)
     }
   })
 }
