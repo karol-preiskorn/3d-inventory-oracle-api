@@ -50,12 +50,6 @@ paths:
                 $ref: '#/components/schemas/Device'
               example:
                 $ref: '#/components/schemas/Device/example'
-          default:
-            description: Unexpected error
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/ErrorModel'
         '500':
           description: Error device not created
           content:
@@ -137,9 +131,11 @@ components:
     Error:
       type: object
       properties:
-        code:
-          type: integer
+        errNum:
+          type: string
         message:
+          type: string
+        offset:
           type: string
       example:
         code: '404'

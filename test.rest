@@ -8,15 +8,15 @@ GET http://localhost:8080/device HTTP/1.1
 
 ###
 
-GET http://localhost:8080/device/1 HTTP/1.1
+GET http://localhost:3000/device/1 HTTP/1.1
 
 ### CREATE DEVICE
 
-POST http://localhost:8080/device HTTP/1.1
+POST http://localhost:3000/device HTTP/1.1
 content-type: application/json
 
 {
-    "device_id": "sample-id-8",
+    "device_id": "sample-id-9",
     "device_name": "sample",
     "device_category": "test-categoty-1",
     "device_type": "type-1"

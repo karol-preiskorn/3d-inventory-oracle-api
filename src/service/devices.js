@@ -1,5 +1,5 @@
 /*
- * File:        /service/devices.js
+* File:        /service/devices.js
  * Description: execute SQLs on database
  * Used by:
  * Dependency:
@@ -194,13 +194,21 @@ exports.create = async function (Device) {
         deviceContext = device
         console.log("👀 device.create.query: ", createSql)
         console.log("👀 device.create.binds: ", deviceContext)
+
         const result = await datatabase.sqlExecute(createSql, deviceContext)
-        //console.log("👀 device.create.result: ", result)
+
+        console.log("👀 device.create.result.errNum: ", result.errNum)
+        console.log('👀 device.create.result.message:', result.message);
+        if(result.errNum === "0"){
+          console.log('👀 device.create.result.error:', result.message);
+        } else {
+          console.log('👀 device.create.result.rows:', result.rows);
+        }
         resolve(result)
       }
     } catch (err) {
       console.log("🐛 Reject(Error) in sqlExecute:", err)
-      reject(err)
+      resolve(err)
     }
   })
 }

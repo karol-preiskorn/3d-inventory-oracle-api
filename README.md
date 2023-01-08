@@ -34,6 +34,17 @@ docker exec -d 5c6a4a0c1063 ./setPassword.sh babilon5
 docker exec -ti 5c6a4a0c1063 sh -c "echo a && echo b"
 sqlplus sys/babilon5@172.17.0.2:1521/orclpdb1 as sysdba
 ```
+# Plan ti use new image of DB
+
+https://hub.docker.com/r/gvenzl/oracle-xe
+
+"db-oracle-21-faststart":
+
+```bash
+docker run -d -p 1521:1521 -e ORACLE_PASSWORD=babilon5 -v oracle-volume:/opt/oracle/oradata gvenzl/oracle-xe:21.3.0-faststart
+
+```
+
 
 
 

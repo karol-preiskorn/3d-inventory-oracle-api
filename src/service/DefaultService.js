@@ -86,22 +86,15 @@ exports.deviceGET = function () {
  * returns Device
  **/
 exports.devicePOST = function (body) {
-  return new Promise(function (resolve, reject) {
-    // var examples = {}
-    // examples['application/json'] = {
-    //   "device_name": "device-A1",
-    //   "device_id": "91601de6-6e93-11ed-a1eb-0242ac120002",
-    //   "device_type": "Server",
-    //   "device_category": "Network"
-    // }
+  return new Promise(async function (resolve, reject) {
     try {
       console.log("👀 post: ", body)
-      const result = devices.create(body)
+      const result = await devices.create(body)
       if (result.length > 0) {
         console.log("👀 devicePOST.return.resolve: ", result)
         resolve(result)
       } else {
-        console.log("🔥 devicePOST.return.reject: ", result)
+        console.log("🔥 devicePOST.return.reject: ", result.message)
         reject(result)
       }
     } catch (err) {

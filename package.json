@@ -3,18 +3,22 @@
   "version": "2.0.1",
   "description": "Run CRUD on Oracle DB. API operation for ultimaInventory schema by Node Express server.",
   "main": "index.js",
+  "config": {
+    "url": "172.17.0.2"
+  },
   "scripts": {
     "install": "npm install",
     "start": "node index.js",
     "nodemon": "nodemon --ext yaml,js,mjs,json,rest --experimental-specifier-resolution=node index.js",
     "docs": "documentation build ./index.js ./service/** ./controllers/** ./api/** --github -o docs/index.html",
-    "db-set-password": "docker exec -d `docker ps --format \"{{.ID}}\"` ./setPassword.sh babilon5",
-    "db-create-user-19g": "sqlplus sys/babilon5@172.17.0.2:1521/orclpdb1 as sysdba @sql/create-user.sql",
-    "db-create-schema-19g": "sqlplus REST/babilon5@172.17.0.2:1521/orclpdb1 @sql/create-schema.sql",
-    "db-create-user-21g": "sqlplus sys/babilon5@172.17.0.2:1521/XEPDB1 as sysdba @sql/create-user.sql",
-    "db-create-schema-21g": "sqlplus REST/babilon5@172.17.0.2:1521/XEPDB1 @sql/create-schema.sql",
+    "db-set-password": "docker exec -d `docker ps --format \"{{.ID}}\" -f ancestor=kpreiskorn/oracle21c:latest` ./setPassword.sh babilon5",
+    "db-create-user-19g": "sqlplus sys/babilon5@${npm_package_config_url}:1521/orclpdb1 as sysdba @sql/create-user.sql",
+    "db-create-schema-19g": "sqlplus REST/babilon5@$npm_package_config_url:1521/orclpdb1 @sql/create-schema.sql",
+    "db-create-user-21g": "sqlplus sys/babilon5@$npm_package_config_url:1521/XEPDB1 as sysdba @sql/create-user.sql",
+    "db-create-schema-21g": "sqlplus REST/babilon5@$npm_package_config_url:1521/XEPDB1 @sql/create-schema.sql",
     "db": "npm run db-set-password && npm run db-create-user && npm run db-create-schema",
     "swagger-get": "wget https://oss.sonatype.org/content/repositories/releases/io/swagger/swagger-codegen-cli/2.4.29/swagger-codegen-cli-2.4.29.jar ./api",
+    "db-oracle-21-faststart": "docker run -d -p 1521:1521 -e ORACLE_PASSWORD=babilon5 -v oracle-volume:/opt/oracle/oradata gvenzl/oracle-xe:21.3.0-faststart",
     "swagger3-generate": "java -jar ./api/swagger-codegen-cli-3.0.36.jar generate -i ./api/openapi.yaml -l nodejs-server -o ./src",
     "42": "docker run -e SCAN_TOKEN=api_78b19f40-5acd-4021-b393-c809429d0efc 42crunch/scand-agent:latest"
   },
@@ -25,7 +29,7 @@
     "body-parser": "^1.20.1",
     "chance": "^1.1.9",
     "connect": "^3.7.0",
-    "documentation": "^14.0.0",
+    "documentation": "^14.0.1",
     "js-yaml": "^4.1.0",
     "nodemon": "^2.0.20",
     "oas3-tools": "^2.2.3",
@@ -36,6 +40,6 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
-    "eslint": "^8.29.0"
+    "eslint": "^8.30.0"
   }
 }

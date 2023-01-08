@@ -90,12 +90,12 @@ export function deviceGET(body) {
 export function devicePOST(body) {
   return new Promise(function (resolve, reject) {
     try {
-      console.log("✅ before devicePOST:", body)
+      console.log("✅ Before devicePOST: ", body)
       const result = create(body)
-      console.log("✅ Result in devicePOST:", result)
+      console.log("✅ Result in devicePOST: ", result)
       resolve(result)
     } catch (err) {
-      console.log("🔥 Error in devicePOST:", err)
+      console.log("🔥 Error in devicePOST: ", err)
       reject(err)
     }
   })

@@ -4,7 +4,7 @@ info:
   description: Run CRUD od Device object on Node Express.
   version: 1.0.2
 servers:
-- url: http://localhost:8080
+- url: http://localhost:3000
   description: Ultima Inventory API
 paths:
   /device:
@@ -42,14 +42,6 @@ paths:
               $ref: '#/components/schemas/Device'
         required: true
       responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Device'
-              example:
-                $ref: '#/components/schemas/Error'
         '200':
           description: Ok
           content:
@@ -58,12 +50,6 @@ paths:
                 $ref: '#/components/schemas/Device'
               example:
                 $ref: '#/components/schemas/Device/example'
-          default:
-            description: Unexpected error
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/ErrorModel'
         "500":
           description: Error device not created
           content:

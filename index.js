@@ -23,7 +23,8 @@ console.log(__dirname);
 import { createServer } from 'http'
 import { initialize } from "./service/database.js"
 import { expressAppConfig } from 'oas3-tools'
-var serverPort = 8080;
+
+var serverPort = 3000;
 
 
 // swaggerRouter configuration

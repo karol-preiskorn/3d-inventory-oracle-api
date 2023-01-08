@@ -35,22 +35,3 @@ const dbConfig19g = {
 const dbConfig = dbConfig21g
 
 module.exports = { dbConfig }
-
-// module.exports = {
-//   user          : "REST" || process.env.USER,
-
-//   // Get the password from the environment variable
-//   // NODE_ORACLEDB_PASSWORD.  The password could also be a hard coded
-//   // string (not recommended), or it could be prompted for.
-//   // Alternatively use External Authentication so that no password is
-//   // needed.
-//   password      : "babilon5" || process.env.PASSWORD,
-
-//   // For information on connection strings see:
-//   // https://oracle.github.io/node-oracledb/doc/api.html#connectionstrings
-//   connectString : "172.17.0.2:1521/XEPDB1" || process.env.CONNECTIONSTRING,
-
-//   // Setting externalAuth is optional.  It defaults to false.  See:
-//   // https://oracle.github.io/node-oracledb/doc/api.html#extauth
-//   externalAuth  : process.env.NODE_ORACLEDB_EXTERNALAUTH ? true : false
-// };
