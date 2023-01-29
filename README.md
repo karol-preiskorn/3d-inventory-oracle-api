@@ -1,4 +1,4 @@
-# Swagger generated server for UltimaInventory
+# Generated server for nodejs
 
 ## Overview
 
