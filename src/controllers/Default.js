@@ -44,7 +44,7 @@ module.exports.deviceDELETE = function deviceDELETE (req, res, next) {
 };
 
 module.exports.deviceGET = function deviceGET (req, res, next) {
-  Default.deviceGET()
+  Default.deviceGET(req)
     .then(function (response) {
       utils.writeJson(res, response);
     })

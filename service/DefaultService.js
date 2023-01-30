@@ -69,10 +69,10 @@ export function deviceGET(body) {
       "device_name": "tall_turquoise_sheep"
     }
 
-    find(body)
+    result = find(body)
 
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]])
+    if (result.length > 0) {
+      resolve(result)
     } else {
       resolve()
     }

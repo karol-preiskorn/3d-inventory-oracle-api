@@ -1,34 +1,34 @@
 /*
-* File:        /service/database.js
-* Description:
-* Used by:
-* Dependency:
-* HISTORY:
-* Date        By   Comments
-* ----------  ---  ---------------------------------------------------------
-* 2022-11-27  KP   initialize
-*/
+ * File:        /service/database.js
+ * Description:
+ * Used by:
+ * Dependency:
+ * HISTORY:
+ * Date        By   Comments
+ * ----------  ---  ---------------------------------------------------------
+ * 2022-11-27  KP   initialize
+ */
 
 'use strict'
 
-import OracleDB from 'oracledb'
-import { database19g, database21g } from "./config.js"
+const OracleDB = require("oracledb")
+const { database19g, database21g } = require("./config.js")
 
-// const { createPool, getPool } = oracledb
+const { createPool, getPool } = OracleDB
 
-async function initialize() {
+async function initializeDB() {
   OracleDB.createPool(database21g)
 }
 
-const _initialize = initialize
-export { _initialize as initialize }
+//const _initializeDB = initializeDB
+// export { _initializeDB as initializeDB }
 
 async function close() {
   await OracleDB.getPool().close()
 }
 
 const _close = close
-export { _close as close }
+// export { _close as close }
 
 function sqlExecute(statement, binds = [], options = {}) {
   return new Promise(async (resolve, reject) => {
@@ -48,7 +48,7 @@ function sqlExecute(statement, binds = [], options = {}) {
       // return { result }
       resolve(result)
     } catch (err) {
-      reject(err);
+      reject(err)
     } finally {
       if (connection) {
         try {
@@ -62,5 +62,4 @@ function sqlExecute(statement, binds = [], options = {}) {
   })
 }
 
-export const simpleExecute = sqlExecute;
-
+// export const simpleExecute = sqlExecute;

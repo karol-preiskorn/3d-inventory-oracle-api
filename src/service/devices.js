@@ -1,5 +1,5 @@
 /*
-* File:        /service/devices.js
+ * File:        /service/devices.js
  * Description: execute SQLs on database
  * Used by:
  * Dependency:
@@ -70,7 +70,7 @@ var DeviceCategory = [
 const oracledb = require("oracledb")
 const datatabase = require("./database.js")
 
-const baseQuery = `select device_id, device_name, device_category, device_type from devices`
+const baseQuery = `SELECT device_id, device_name, device_category, device_type FROM devices`
 
 exports.attributes_typesGET = function () {
   return new Promise(function (resolve, reject) {
@@ -78,46 +78,75 @@ exports.attributes_typesGET = function () {
   })
 }
 
+
+
 exports.find = function (context) {
   return new Promise(function (resolve, reject) {
-    console.log("👀 device.get.context: ", context)
-    console.log("👀 device.get.context.device_id: ", context.device_id)
+    let prompt = "[device.find]"
+    let body = context.body
+    //console.log("👀", prompt, " context.body: ", body)
     let query = baseQuery
-    const binds = {
-      device_id: {
-        dir: oracledb.BIND_IN,
-        type: oracledb.DB_TYPE_VARCHAR,
-        val: context.device_id,
-      },
-      device_name: {
-        dir: oracledb.BIND_IN,
-        type: oracledb.DB_TYPE_VARCHAR,
-        val: context.device_name,
-      },
-      device_category: {
-        dir: oracledb.BIND_IN,
-        type: oracledb.DB_TYPE_VARCHAR,
-        val: context.device_category,
-      },
-      device_type: {
-        dir: oracledb.BIND_IN,
-        type: oracledb.DB_TYPE_VARCHAR,
-        val: context.device_type,
-      },
-    }
+    let binds = ""
 
-    if (context.device_id) {
-      binds.device_id = context.device_id
-      query += " where device_id = :device_id"
-    }
+    //let j_binds = JSON.parse('{"device_name": "device-A1"}')
 
+    if (
+      context.body.device_id ||
+      context.body.device_name ||
+      context.body.device_category ||
+      context.body.device_type
+    ) {
+      query += " WHERE"
+    }
+    if (context.body.device_id) {
+      query += " device_id = :device_id"
+      binds = {
+        device_id: {
+          dir: oracledb.BIND_IN,
+          type: oracledb.DB_TYPE_VARCHAR,
+          val: context.body.device_id,
+        },
+      }
+    }
+    // if (context.body.device_name) {
+    //   query += " device_id = :device_name";
+    // binds += {
+    //   device_name: {
+    //   dir: oracledb.BIND_IN,
+    // type: oracledb.DB_TYPE_VARCHAR,
+    // val: context.body.device_name,
+    //       },
+    //     };
+    //   }
+    // if (context.body.device_category) {
+    //   query += " device_id = :device_category";
+    // binds += {
+    //   device_category: {
+    //   dir: oracledb.BIND_IN,
+    // type: oracledb.DB_TYPE_VARCHAR,
+    // val: context.body.device_category,
+    //       },
+    //     };
+    //   }
+    // if (context.body.device_type) {
+    //   query += " device_id = :device_type";
+    // binds += {
+    //   device_type: {
+    //   dir: oracledb.BIND_IN,
+    // type: oracledb.DB_TYPE_VARCHAR,
+    // val: context.body.device_type,
+    //       },
+    //     };
+    //   }
+    // j_binds = JSON.stringify(j_binds);
+    //
+    //console.log("👀", prompt, " device.get.query: ", query)
+    //console.log("👀", prompt, " device.get.binds: ", binds)
     try {
-      console.log("👀 device.get.query: ", query)
-      console.log("👀 device.get.binds: ", binds)
       const result = datatabase.sqlExecute(query, binds)
       resolve(result)
     } catch (err) {
-      console.log("🐛 Error in simpleExecute:", err)
+      console.log("🐛", prompt, " Error in simpleExecute:", err)
       reject(err)
     }
   })
@@ -198,11 +227,11 @@ exports.create = async function (Device) {
         const result = await datatabase.sqlExecute(createSql, deviceContext)
 
         console.log("👀 device.create.result.errNum: ", result.errNum)
-        console.log('👀 device.create.result.message:', result.message);
-        if(result.errNum === "0"){
-          console.log('👀 device.create.result.error:', result.message);
+        console.log("👀 device.create.result.message:", result.message)
+        if (result.errNum === "0") {
+          console.log("👀 device.create.result.error:", result.message)
         } else {
-          console.log('👀 device.create.result.rows:', result.rows);
+          console.log("👀 device.create.result.rows:", result.rows)
         }
         resolve(result)
       }

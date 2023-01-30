@@ -2,14 +2,13 @@
   "name": "api-for-ultimainventory",
   "version": "2.0.1",
   "description": "Run CRUD on Oracle DB. API operation for ultimaInventory schema by Node Express server.",
+  "type": "commonjs",
   "main": "index.js",
   "config": {
     "url": "172.17.0.2"
   },
   "scripts": {
     "install": "npm install",
-    "start": "node index.js",
-    "nodemon": "nodemon --ext yaml,js,mjs,json,rest --experimental-specifier-resolution=node index.js",
     "docs": "documentation build ./index.js ./service/** ./controllers/** ./api/** --github -o docs/index.html",
     "db-set-password": "docker exec -d `docker ps --format \"{{.ID}}\" -f ancestor=kpreiskorn/oracle21c:latest` ./setPassword.sh babilon5",
     "db-create-user-19g": "sqlplus sys/babilon5@${npm_package_config_url}:1521/orclpdb1 as sysdba @sql/create-user.sql",

@@ -1,6 +1,6 @@
 'use strict'
 
-const devices = require('./devices.js')
+const { find, create } = require('./devices.js')
 
 /**
  * Server heartbeat operation. Get information about devices attributes.
@@ -60,19 +60,16 @@ exports.deviceDELETE = function () {
  *
  * returns Device
  **/
-exports.deviceGET = function () {
-  return new Promise(function (resolve, reject) {
-    var examples = {}
-    examples['application/json'] = {
-      "device_name": "device-A1",
-      "device_id": "91601de6-6e93-11ed-a1eb-0242ac120002",
-      "device_type": "Server",
-      "device_category": "Network"
-    }
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]])
+exports.deviceGET = function (body) {
+  return new Promise(async function (resolve, reject) {
+    let prompt = "[DefaultService.deviceGET]"
+    var result = await find(body)
+   if (Object.keys(result).length > 0) {
+      console.log("👀", prompt, " result: ", result.rows)
+      resolve(result)
     } else {
-      resolve()
+      console.log("👀", prompt, " reject: ", result)
+      resolve(reject)
     }
   })
 }
@@ -86,19 +83,14 @@ exports.deviceGET = function () {
  * returns Device
  **/
 exports.devicePOST = function (body) {
-  return new Promise(async function (resolve, reject) {
+  return new Promise(function (resolve, reject) {
     try {
-      console.log("👀 post: ", body)
-      const result = await devices.create(body)
-      if (result.length > 0) {
-        console.log("👀 devicePOST.return.resolve: ", result)
-        resolve(result)
-      } else {
-        console.log("🔥 devicePOST.return.reject: ", result.message)
-        reject(result)
-      }
+      console.log("✅ Before devicePOST: ", body)
+      const result = create(body)
+      console.log("✅ Result in devicePOST: ", result)
+      resolve(result)
     } catch (err) {
-      console.log("🔥 devicePOST.return.catch: ", err)
+      console.log("🔥 Error in devicePOST: ", err)
       reject(err)
     }
   })
