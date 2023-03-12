@@ -1,0 +1,15 @@
+﻿# Ignore artifacts:
+build
+coverage
+.angular
+.husky
+.vscode
+dist
+node_modules
+*.yaml
+api
+src/api
+**/.git
+**/.svn
+**/.hg
+**/node_modules

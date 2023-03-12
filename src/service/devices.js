@@ -17,76 +17,72 @@ const {
   adjectives,
   colors,
   animals,
-} = require("unique-names-generator")
-
-var Chance = require("chance")
+} = require('unique-names-generator')
 
 var DeviceTypes = [
-  "Bridge",
-  "CoolAir",
-  "Copier",
-  "Desktop",
-  "Firewall",
-  "Getaway",
-  "Hubs",
-  "Load Balancer",
-  "Modem",
-  "Multiplexer",
-  "PDU System",
-  "Power",
-  "Printer",
-  "Probe",
-  "Repeaters",
-  "Router",
-  "Security Device",
-  "Server",
-  "Switch",
-  "Telephone",
-  "Terminal",
-  "Traffic shaper",
-  "Transceiver",
-  "UPS System",
-  "Workstations",
+  'Bridge',
+  'CoolAir',
+  'Copier',
+  'Desktop',
+  'Firewall',
+  'Getaway',
+  'Hubs',
+  'Load Balancer',
+  'Modem',
+  'Multiplexer',
+  'PDU System',
+  'Power',
+  'Printer',
+  'Probe',
+  'Repeaters',
+  'Router',
+  'Security Device',
+  'Server',
+  'Switch',
+  'Telephone',
+  'Terminal',
+  'Traffic shaper',
+  'Transceiver',
+  'UPS System',
+  'Workstations',
 ]
 
 var DeviceCategory = [
   {
-    Category: "Connectivity",
+    Category: 'Connectivity',
     Description:
-      "Data centers often have multiple fiber connections to the internet provided by multiple carriers.",
+      'Data centers often have multiple fiber connections to the internet provided by multiple carriers.',
   },
   {
-    Category: "Facility",
+    Category: 'Facility',
     Description:
-      "Data center buildings may be specifically designed as a data center. For example, the height of ceilings will match requirements for racks and overhead systems. In some cases, a data center occupies a floor of an existing building.",
+      'Data center buildings may be specifically designed as a data center. For example, the height of ceilings will match requirements for racks and overhead systems. In some cases, a data center occupies a floor of an existing building.',
   },
   {
-    Category: "Site",
+    Category: 'Site',
     Description:
       'A data center requires a site with connections to grids, networks and physical <a href="https://simplicable.com/new/infrastructure">infrastructure</a>  such as roads. Proximity to markets, customers, employees and services also play a role in selecting an appropriate site. Locating data centers in cold climates can reduce cooling costs.',
   },
 ]
 
-const oracledb = require("oracledb")
-const datatabase = require("./database.js")
+const oracledb = require('oracledb')
+const datatabase = require('./database.js')
 
 const baseQuery = `SELECT device_id, device_name, device_category, device_type FROM devices`
 
 exports.attributes_typesGET = function () {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function (resolve, _reject) {
     resolve()
   })
 }
 
-
-
 exports.find = function (context) {
   return new Promise(function (resolve, reject) {
-    let prompt = "[device.find]"
+    let prompt = '[device.find]'
     let body = context.body
     //console.log("👀", prompt, " context.body: ", body)
     let query = baseQuery
-    let binds = ""
+    let binds = ''
 
     //let j_binds = JSON.parse('{"device_name": "device-A1"}')
 
@@ -96,10 +92,10 @@ exports.find = function (context) {
       context.body.device_category ||
       context.body.device_type
     ) {
-      query += " WHERE"
+      query += ' WHERE'
     }
     if (context.body.device_id) {
-      query += " device_id = :device_id"
+      query += ' device_id = :device_id'
       binds = {
         device_id: {
           dir: oracledb.BIND_IN,
@@ -146,7 +142,7 @@ exports.find = function (context) {
       const result = datatabase.sqlExecute(query, binds)
       resolve(result)
     } catch (err) {
-      console.log("🐛", prompt, " Error in simpleExecute:", err)
+      console.log('🐛', prompt, ' Error in simpleExecute:', err)
       reject(err)
     }
   })
@@ -158,7 +154,7 @@ exports.find = function (context) {
 const createSql = `insert into devices (device_id, device_name, device_category, device_type) values (:device_id, :device_name, :device_category, :device_type)`
 
 exports.create = async function (Device) {
-  return new Promise(async function (resolve, reject) {
+  return new Promise(async function (resolve, _reject) {
     try {
       let deviceContext = Object.assign({}, Device)
 
@@ -221,22 +217,22 @@ exports.create = async function (Device) {
           },
         }
         deviceContext = device
-        console.log("👀 device.create.query: ", createSql)
-        console.log("👀 device.create.binds: ", deviceContext)
+        console.log('👀 device.create.query: ', createSql)
+        console.log('👀 device.create.binds: ', deviceContext)
 
         const result = await datatabase.sqlExecute(createSql, deviceContext)
 
-        console.log("👀 device.create.result.errNum: ", result.errNum)
-        console.log("👀 device.create.result.message:", result.message)
-        if (result.errNum === "0") {
-          console.log("👀 device.create.result.error:", result.message)
+        console.log('👀 device.create.result.errNum: ', result.errNum)
+        console.log('👀 device.create.result.message:', result.message)
+        if (result.errNum === '0') {
+          console.log('👀 device.create.result.error:', result.message)
         } else {
-          console.log("👀 device.create.result.rows:", result.rows)
+          console.log('👀 device.create.result.rows:', result.rows)
         }
         resolve(result)
       }
     } catch (err) {
-      console.log("🐛 Reject(Error) in sqlExecute:", err)
+      console.log('🐛 Reject(Error) in sqlExecute:', err)
       resolve(err)
     }
   })

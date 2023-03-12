@@ -7,7 +7,7 @@ POST http://localhost:3000/device HTTP/1.1
 content-type: application/json
 
 {
-    "device_id": "sample36",
+    "device_id": "sample3",
     "device_name": "device-name-a1",
     "device_category": "Server",
     "device_type": "Racks"
@@ -19,7 +19,7 @@ GET http://localhost:3000/device HTTP/1.1
 content-type: application/json
 
 {
-    "device_id": "sample36"
+    "device_id": "sample38"
 }
 
 ### get request selected devices
