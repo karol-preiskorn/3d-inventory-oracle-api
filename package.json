@@ -10,7 +10,7 @@
   },
   "scripts": {
     "42": "docker run -e SCAN_TOKEN=scan_dd814bc9-6a91-4348-a84e-de46ad3664a8 42crunch/scand-agent:latest",
-    "install": "npm install",
+    "preliminary": "npm install",
     "docs": "documentation build ./index.js ./service/** ./controllers/** ./api/** --github -o docs/index.html",
     "db-set-password": "docker exec -d `docker ps --format \"{{.ID}}\" -f ancestor=kpreiskorn/oracle21c:latest` ./setPassword.sh babilon5",
     "db-create-user-19g": "sqlplus sys/babilon5@${npm_package_config_url}:1521/orclpdb1 as sysdba @sql/create-user.sql",
