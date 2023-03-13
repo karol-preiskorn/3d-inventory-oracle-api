@@ -3,9 +3,10 @@
   "version": "2.0.3",
   "description": "Run CRUD on Oracle DB. API operation for ultimaInventory schema by Node Express server.",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "",
   "config": {
-    "url": "172.17.0.2"
+    "url": "172.17.0.2",
+    "port": "1521"
   },
   "scripts": {
     "42": "docker run -e SCAN_TOKEN=scan_dd814bc9-6a91-4348-a84e-de46ad3664a8 42crunch/scand-agent:latest",
@@ -20,30 +21,17 @@
     "swagger-get": "wget https://oss.sonatype.org/content/repositories/releases/io/swagger/swagger-codegen-cli/2.4.29/swagger-codegen-cli-2.4.29.jar ./api",
     "db-oracle-21-faststart": "docker run -d -p 1521:1521 -e ORACLE_PASSWORD=babilon5 -v oracle-volume:/opt/oracle/oradata gvenzl/oracle-xe:21.3.0-faststart",
     "swagger3-generate": "java -jar ./api/swagger-codegen-cli-3.0.36.jar generate -i ./api/openapi.yaml -l nodejs-server -o ./src",
-    "prepare": "husky install"
-  },
-  "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown --ignore-path .prettierignore"
+    "prepare": "husky install",
+    "prettier": "prettier --write --ignore-unknown --ignore-path .prettierignore"
   },
   "license": "ultimasolution.pl",
-  "private": true,
-  "dependencies": {
-    "chance": "^1.1.11",
-    "connect": "^3.7.0",
-    "documentation": "^14.0.1",
-    "js-yaml": "^4.1.0",
-    "nodemon": "^2.0.21",
-    "oas3-tools": "^2.2.3",
-    "oracledb": "^5.5.0",
-    "path": "^0.12.7",
-    "unique-names-generator": "^4.7.1",
-    "url": "^0.11.0"
-  },
+  "private": false,
   "devDependencies": {
-    "@types/body-parser": "^1.19.2",
-    "eslint": "^8.36.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.0",
     "prettier": "2.8.4"
+  },
+  "lint-staged": {
+    "*.{js,css,md}": "prettier --write"
   }
 }
