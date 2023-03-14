@@ -1,9 +1,8 @@
-# prettier-ignore
 openapi: 3.0.2
 info:
-  title: API for UltimaInventory
+  title: API for project 3d-inventory
   description: Run CRUD od Device object on Node Express.
-  version: 1.0.2
+  version: 1.0.3
 servers:
 - url: http://localhost:8080
   description: Ultima Inventory API
@@ -68,6 +67,79 @@ paths:
         "200":
           description: OK
       x-swagger-router-controller: Default
+  /log:
+    get:
+      summary: Get log from database
+      description: Get all log.
+      operationId: logGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Log'
+              examples:
+                id:
+                  value: "222"
+                date:
+                  value: 2023-03-12
+                message:
+                  value: Message in log
+              x-swagger-router-controller: Default
+      x-swagger-router-controller: Default
+    put:
+      summary: Update new log
+      description: Update log record.
+      operationId: logPUT
+      responses:
+        "200":
+          description: OK
+      x-swagger-router-controller: Default
+    post:
+      summary: Insert new log
+      description: Create log.
+      operationId: logPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Log'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Log'
+              example:
+                $ref: '#/components/schemas/Log/example'
+        "500":
+          description: Error log not created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                $ref: '#/components/schemas/Error'
+        "404":
+          description: Error log not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                $ref: '#/components/schemas/Error'
+      x-swagger-router-controller: Default
+    delete:
+      summary: Delete log
+      description: Delete all or specyfic id log.
+      operationId: logDELETE
+      responses:
+        "200":
+          description: OK
+      x-swagger-router-controller: Default
   /connections:
     get:
       summary: Server heartbeat operation. Get information about connection between
@@ -78,7 +150,6 @@ paths:
       responses:
         "200":
           description: OK
-      security: []
       x-swagger-router-controller: Default
   /attributes:
     get:
@@ -89,7 +160,6 @@ paths:
       responses:
         "200":
           description: OK
-      security: []
       x-swagger-router-controller: Default
   /attributes_types:
     get:
@@ -101,7 +171,6 @@ paths:
       responses:
         "200":
           description: OK
-      security: []
       x-swagger-router-controller: Default
 components:
   schemas:
@@ -134,8 +203,29 @@ components:
         offset:
           type: string
       example:
-        code: "404"
+        errNum: "404"
         message: Error example app not work...
+        offset: line 10022
+    Log:
+      required:
+      - date
+      - id
+      - message
+      type: object
+      properties:
+        id:
+          type: string
+          description: Incemential log Id
+        date:
+          type: string
+          description: Date as string
+        message:
+          type: string
+          description: Log message
+      example:
+        id: "102"
+        date: 2023-03-12 14:00
+        message: Meaasge in log
   responses:
     "200":
       description: OK

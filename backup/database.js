@@ -1,58 +1,55 @@
 /*
  * File:        /service/database.js
- * Description: connect to database21g and 19g
+ * Description:
  * Used by:
  * Dependency:
  *
- * Date        By     Comments
- * ----------  -----  --------------------------------------
- * 2023-03-12	 C2RLO
- * 2022-11-27  KP     initialize
+ * Date        By   Comments
+ * ----------  ---  -------------------------------------
+ * 2022-11-27  KP   initialize
  */
 
 'use strict'
 
-const OracleDB = require('oracledb')
-const { database19g, database21g } = require('./config.js')
+const oracledb = require('oracledb')
+const dbConfig = require('./dbConfig.js')
 
-const { createPool, getPool, getConnection } = OracleDB
-
-async function initializeDB() {
-  OracleDB.createPool(database21g)
-}
-
-async function close() {
-  await OracleDB.getPool().close()
-}
-
-const _close = close
-
-function sqlExecute(statement, binds = [], options = {}) {
-  return new Promise((resolve, reject) => {
-    let connection
-    options.outFormat = OracleDB.OUT_FORMAT_OBJECT
+exports.sqlExecute = function (statement, binds = [], options = {}) {
+  return new Promise(async (resolve, reject) => {
+    let prompt = '[database.sqlExecute]'
+    options.outFormat = oracledb.OUT_FORMAT_OBJECT
     options.autoCommit = true
     options.extendedMetaData = true
     options.fetchArraySize = 100
+    let connection
     try {
-      connection = getConnection()
-      //console.log("🔺sqlExecute.statement: ", statement)
-      //console.log("🔺sqlExecute.binds:     ", binds)
-      //console.log("🔺sqlExecute.opts:      ", options)
-      const result = connection.execute(statement, binds, options)
-      //console.log("🔺sqlExecute.result:    ", result)
-      // console.log(result.rows);
-      // return { result }
+      connection = await oracledb.getConnection(dbConfig.dbConfig)
+      console.log('🔺', prompt, ' statement:   ', statement)
+      console.log('🔺', prompt, ' binds:       ', binds)
+      // console.log("🔺sqlExecute.opts:        ", options)
+      const result = await connection.execute(statement, binds, options)
+      console.log('🔺', prompt, ' result.rows: ', result.rows)
+      //console.log("🔺",prompt," result.rows: ", options)
       resolve(result)
     } catch (err) {
+      console.log(
+        '🐛',
+        prompt,
+        ' reject: errNum:',
+        err.errorNum,
+        'message:',
+        err.message,
+        'offset:',
+        err.offset
+      )
       reject(err)
     } finally {
       if (connection) {
         try {
-          console.log('sqlExecute.close()')
+          console.log('🐛', prompt, ' close()')
           connection.close()
         } catch (err) {
-          console.log('sqlExecute.error: ', err)
+          console.log('🐛', prompt, ' catch.error: ', err)
         }
       }
     }

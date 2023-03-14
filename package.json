@@ -1,37 +1,45 @@
 {
   "name": "3d-inventory-oracle-api",
   "version": "2.0.3",
-  "description": "Run CRUD on Oracle DB. API operation for ultimaInventory schema by Node Express server.",
+  "private": false,
+  "description": "Run Oracle DB and generate Swagger API schema. API operation for ultimaInventory schema by Node Express server.",
+  "license": "ultimasolution.pl",
   "type": "commonjs",
   "main": "",
-  "config": {
-    "url": "172.17.0.2",
-    "port": "1521"
-  },
   "scripts": {
     "42": "docker run -e SCAN_TOKEN=scan_dd814bc9-6a91-4348-a84e-de46ad3664a8 42crunch/scand-agent:latest",
-    "preliminary": "npm install",
-    "docs": "documentation build ./index.js ./service/** ./controllers/** ./api/** --github -o docs/index.html",
-    "db-set-password": "docker exec -d `docker ps --format \"{{.ID}}\" -f ancestor=kpreiskorn/oracle21c:latest` ./setPassword.sh babilon5",
-    "db-create-user-19g": "sqlplus sys/babilon5@${npm_package_config_url}:1521/orclpdb1 as sysdba @sql/create-user.sql",
-    "db-create-schema-19g": "sqlplus REST/babilon5@$npm_package_config_url:1521/orclpdb1 @sql/create-schema.sql",
-    "db-create-user-21g": "sqlplus sys/babilon5@$npm_package_config_url:1521/XEPDB1 as sysdba @sql/create-user.sql",
-    "db-create-schema-21g": "sqlplus REST/babilon5@$npm_package_config_url:1521/XEPDB1 @sql/create-schema.sql",
+    "backup-before-generate-swagger": "cp -v ./src/service/* ./backup",
     "db": "npm run db-set-password && npm run db-create-user && npm run db-create-schema",
-    "swagger-get": "wget https://oss.sonatype.org/content/repositories/releases/io/swagger/swagger-codegen-cli/2.4.29/swagger-codegen-cli-2.4.29.jar ./api",
+    "db-create-schema-19g": "sqlplus REST/babilon5@$npm_package_config_url:1521/orclpdb1 @sql/create-schema.sql",
+    "db-create-schema-21g": "sqlplus REST/babilon5@$npm_package_config_url:1521/XEPDB1 @sql/create-schema.sql",
+    "db-create-user-19g": "sqlplus sys/babilon5@${npm_package_config_url}:1521/orclpdb1 as sysdba @sql/create-user.sql",
+    "db-create-user-21g": "sqlplus sys/babilon5@$npm_package_config_url:1521/XEPDB1 as sysdba @sql/create-user.sql",
     "db-oracle-21-faststart": "docker run -d -p 1521:1521 -e ORACLE_PASSWORD=babilon5 -v oracle-volume:/opt/oracle/oradata gvenzl/oracle-xe:21.3.0-faststart",
-    "swagger3-generate": "java -jar ./api/swagger-codegen-cli-3.0.36.jar generate -i ./api/openapi.yaml -l nodejs-server -o ./src",
+    "db-set-password": "docker exec -d `docker ps --format \"{{.ID}}\" -f ancestor=kpreiskorn/oracle21c:latest` ./setPassword.sh babilon5",
+    "docs": "documentation build ./index.js ./service/** ./controllers/** ./api/** --github -o docs/index.html",
+    "preliminary": "npm install",
     "prepare": "husky install",
-    "prettier": "prettier --write --ignore-unknown --ignore-path .prettierignore"
-  },
-  "license": "ultimasolution.pl",
-  "private": false,
-  "devDependencies": {
-    "husky": "^8.0.3",
-    "lint-staged": "^13.2.0",
-    "prettier": "2.8.4"
+    "prettier": "prettier --write --ignore-unknown --ignore-path .prettierignore",
+    "swagger": "npm backup-before-generate-swagger && npm ",
+    "swagger-get-v2": "wget https://oss.sonatype.org/content/repositories/releases/io/swagger/swagger-codegen-cli/2.4.29/swagger-codegen-cli-2.4.29.jar ./api",
+    "swagger-get-v3": "wget https://oss.sonatype.org/content/repositories/releases/io/swagger/swagger-codegen-cli/2.4.29/swagger-codegen-cli-2.4.29.jar ./api",
+    "swagger-v3-docker-generate": "docker run --rm -v ${PWD}:/local swaggerapi/swagger-codegen-cli-v3 generate -i /local/api/openapi.yaml -l nodejs-server -o /local/src",
+    "swagger-v3-generate": "java -jar ./api/swagger-codegen-cli-3.0.36.jar generate -i api/openapi.yaml -l nodejs-server -o src",
+    "swagger-v3-editor": "docker run -d -p 80:8080 -v ${PWD}:/tmp -e SWAGGER_FILE=/tmp/api/openapi.yaml swaggerapi/swagger-editor",
+    "swagger-v3-editor-open": "open http://locahost:8080"
   },
   "lint-staged": {
     "*.{js,css,md}": "prettier --write"
+  },
+  "config": {
+    "port": "1521",
+    "url": "172.17.0.2"
+  },
+  "devDependencies": {
+    "@types/open": "^6.2.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.0",
+    "open": "^8.4.2",
+    "prettier": "2.8.4"
   }
 }

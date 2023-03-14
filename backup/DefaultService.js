@@ -8,7 +8,7 @@ const { find, create } = require('./devices.js')
  *
  * no response value expected for this operation
  **/
-export function attributesGET() {
+exports.attributesGET = function () {
   return new Promise(function (resolve, reject) {
     resolve()
   })
@@ -20,7 +20,7 @@ export function attributesGET() {
  *
  * no response value expected for this operation
  **/
-export function attributes_typesGET() {
+exports.attributes_typesGET = function () {
   return new Promise(function (resolve, reject) {
     resolve()
   })
@@ -32,7 +32,7 @@ export function attributes_typesGET() {
  *
  * no response value expected for this operation
  **/
-export function connectionsGET() {
+exports.connectionsGET = function () {
   return new Promise(function (resolve, reject) {
     resolve()
   })
@@ -44,7 +44,7 @@ export function connectionsGET() {
  *
  * no response value expected for this operation
  **/
-export function deviceDELETE() {
+exports.deviceDELETE = function () {
   return new Promise(function (resolve, reject) {
     resolve()
   })
@@ -56,20 +56,16 @@ export function deviceDELETE() {
  *
  * returns Device
  **/
-export function deviceGET(body) {
-  return new Promise(function (resolve, reject) {
-    // example response
-    var examples = {}
-    examples['application/json'] = {
-      device_name: 'tall_turquoise_sheep',
-    }
-
-    result = find(body)
-
-    if (result.length > 0) {
+exports.deviceGET = function (body) {
+  return new Promise(async function (resolve, reject) {
+    let prompt = '[DefaultService.deviceGET]'
+    var result = await find(body)
+    if (Object.keys(result).length > 0) {
+      console.log('👀', prompt, ' result: ', result.rows)
       resolve(result)
     } else {
-      resolve()
+      console.log('👀', prompt, ' reject: ', result)
+      resolve(reject)
     }
   })
 }
@@ -79,9 +75,9 @@ export function deviceGET(body) {
  * Create device.
  *
  * body Device
- * no response value expected for this operation
+ * returns Device
  **/
-export function devicePOST(body) {
+exports.devicePOST = function (body) {
   return new Promise(function (resolve, reject) {
     try {
       console.log('✅ Before devicePOST: ', body)
@@ -101,7 +97,7 @@ export function devicePOST(body) {
  *
  * no response value expected for this operation
  **/
-export function devicePUT() {
+exports.devicePUT = function () {
   return new Promise(function (resolve, reject) {
     resolve()
   })
