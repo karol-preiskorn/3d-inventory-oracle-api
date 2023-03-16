@@ -6,5 +6,6 @@
     "RLO",
     "Rowid"
   ],
-  "openapi.dataDictionaryPreAuditFix": "always"
+  "openapi.dataDictionaryPreAuditFix": "always",
+  "java.configuration.updateBuildConfiguration": "automatic"
 }

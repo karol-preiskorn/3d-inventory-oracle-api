@@ -15,11 +15,10 @@ content-type: application/json
 
 ### get devices
 
-GET http://localhost:3000/device HTTP/1.1
+GET http://localhost:3000/device/sample38 HTTP/1.1
 content-type: application/json
 
 {
-    "device_id": "sample38"
 }
 
 ### get request selected devices
