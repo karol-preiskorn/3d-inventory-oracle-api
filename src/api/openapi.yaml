@@ -1,48 +1,104 @@
-openapi: 3.0.2
+openapi: 3.0.3
 info:
   title: API for project 3d-inventory
-  description: Run CRUD od Device object on Node Express.
+  description: Run CRUD od 3d-inventory data model.
   version: 1.0.3
 servers:
-- url: http://localhost:8080
-  description: Ultima Inventory API
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/karol-preiskorn/ultima-rest/1.0.3
+  - url: 'http://localhost:8080'
+    description: 3d-inventory-oracle-api
+
 paths:
-  /device:
+  /device/{deviceId}:
     get:
-      summary: Get Device Id
-      description: Get information about devices.
+      summary:
+        Get Device Id
+      description:
+        Get list devices.
       operationId: deviceGET
+      parameters:
+      - name: deviceId
+        in: path
+        required: true
+        description: Parameter deviceId is string uuid
+        schema:
+          type : string
       responses:
-        "200":
-          description: OK
+        '200':
+          description: List of devices
           content:
             application/json:
               schema:
+                type: array
                 $ref: '#/components/schemas/Device'
-              examples:
-                device_id:
-                  value: tall_turquoise_sheep
+        '404':
+          description: Devices not found
+          content:
+            application/json:
+              schema:
+                type: array
+                $ref: '#/components/schemas/Device'
       x-swagger-router-controller: Default
+      tags:
+        - device
+
     put:
-      summary: Insert new device
-      description: Create device.
+      summary:
+        "Update new device"
+      description:
+        Update device.
+      parameters:
+      - name: deviceId
+        in: path
+        required: true
+        description: Parameter deviceId is string uuid
+        schema:
+          type : string
       operationId: devicePUT
-      responses:
-        "200":
-          description: OK
-      x-swagger-router-controller: Default
-    post:
-      summary: Insert new device
-      description: Create device.
-      operationId: devicePOST
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Device'
-        required: true
       responses:
-        "200":
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        '404':
+          description: No found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-swagger-router-controller: Default
+      tags:
+        - device
+
+    post:
+      summary: Create new device
+      description: Create device.
+      operationId: devicePOST
+      parameters:
+      - name: deviceId
+        in: path
+        required: true
+        description: Parameter deviceId is string uuid
+        schema:
+          type : string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Device'
+            example:
+              $ref: '#/components/schemas/Device/example'
+      responses:
+        '200':
           description: Ok
           content:
             application/json:
@@ -50,7 +106,7 @@ paths:
                 $ref: '#/components/schemas/Device'
               example:
                 $ref: '#/components/schemas/Device/example'
-        "500":
+        '500':
           description: Error device not created
           content:
             application/json:
@@ -59,21 +115,45 @@ paths:
               example:
                 $ref: '#/components/schemas/Error'
       x-swagger-router-controller: Default
+      tags:
+        - device
+
     delete:
       summary: Insert new device
       description: Create device.
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          description: Parameter deviceId is string uuid
+          schema:
+            type : string
       operationId: deviceDELETE
       responses:
-        "200":
+        '200':
           description: OK
       x-swagger-router-controller: Default
-  /log:
+      tags:
+        - device
+
+  /log/{logId}:
     get:
-      summary: Get log from database
-      description: Get all log.
+      summary:
+        Get log from database
+      description:
+        Get all log.
+      parameters:
+        - name: logId
+          in: path
+          required: true
+          description: Parameter logId is number of log
+          schema:
+            type : integer
+            format: int64
+            minimum: 1
       operationId: logGET
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
@@ -81,24 +161,76 @@ paths:
                 $ref: '#/components/schemas/Log'
               examples:
                 id:
-                  value: "222"
+                  value: '222'
                 date:
-                  value: 2023-03-12
+                  value: '2023-03-12'
                 message:
-                  value: Message in log
+                  value: 'Message in log'
               x-swagger-router-controller: Default
-      x-swagger-router-controller: Default
+        '404':
+          description: No found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/404'
+              x-swagger-router-controller: Default
+        '500':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/5XX'
+              x-swagger-router-controller: Default
+      tags:
+        - log
+
     put:
-      summary: Update new log
-      description: Update log record.
+      summary:
+        Update new log
+      description:
+        Update log record.
+      parameters:
+        - name: logId
+          in: path
+          required: true
+          description: Parameter logId is number of log
+          schema:
+            type : integer
+            format: int64
+            minimum: 1
       operationId: logPUT
       responses:
-        "200":
+        '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Log'
+              examples:
+                id:
+                  value: '222'
+                date:
+                  value: '2023-03-12'
+                message:
+                  value: 'Message in log'
       x-swagger-router-controller: Default
+      tags:
+        - log
+
     post:
-      summary: Insert new log
-      description: Create log.
+      summary:
+        Insert new log
+      description:
+        Create log.
+      parameters:
+        - name: logId
+          in: path
+          required: true
+          description: Parameter logId is number of log
+          schema:
+            type : integer
+            format: int64
+            minimum: 1
       operationId: logPOST
       requestBody:
         content:
@@ -107,7 +239,7 @@ paths:
               $ref: '#/components/schemas/Log'
         required: true
       responses:
-        "200":
+        '200':
           description: Ok
           content:
             application/json:
@@ -115,69 +247,88 @@ paths:
                 $ref: '#/components/schemas/Log'
               example:
                 $ref: '#/components/schemas/Log/example'
-        "500":
+        '500':
           description: Error log not created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Log'
               example:
-                $ref: '#/components/schemas/Error'
-        "404":
+                $ref: '#/components/responses/5XX'
+        '404':
           description: Error log not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Log'
       x-swagger-router-controller: Default
+      tags:
+        - log
+
     delete:
       summary: Delete log
       description: Delete all or specyfic id log.
+      parameters:
+        - name: logId
+          in: path
+          required: true
+          description: Parameter logId is number of log
+          schema:
+            type : integer
+            format: int64
+            minimum: 1
       operationId: logDELETE
       responses:
-        "200":
+        '200':
           description: OK
       x-swagger-router-controller: Default
+      tags:
+        - log
+
   /connections:
     get:
-      summary: Server heartbeat operation. Get information about connection between
-        Devices.
-      description: "This operation shows how to override the global security defined\
-        \ above, as we want to open it up for all users."
+      summary: >-
+        Server heartbeat operation. Get information about connection between Devices.
+      description: Connection between devices
       operationId: connectionsGET
       responses:
-        "200":
+        '200':
           description: OK
       x-swagger-router-controller: Default
+      tags:
+        - connection
+
   /attributes:
     get:
-      summary: Server heartbeat operation. Get information about devices attributes.
-      description: "This operation shows how to override the global security defined\
-        \ above, as we want to open it up for all users."
-      operationId: attributesGET
+      description: Devices attributes
       responses:
-        "200":
+        '200':
           description: OK
       x-swagger-router-controller: Default
+      tags:
+        - attributes
+
   /attributes_types:
     get:
-      summary: Server heartbeat operation. Get information about devices attributes
-        types.
-      description: "This operation shows how to override the global security defined\
-        \ above, as we want to open it up for all users."
+      summary: >-
+        Server heartbeat operation. Get information about devices attributes types.
+      description: Dictionary attributes types of specific type of device.
       operationId: attributes_typesGET
       responses:
-        "200":
+        '200':
           description: OK
       x-swagger-router-controller: Default
+      tags:
+        - attributes
+
 components:
+
   schemas:
+
     Device:
       required:
-      - device_id
-      - device_name
+        - device_id
+        - device_name
       type: object
       properties:
         device_id:
@@ -189,10 +340,38 @@ components:
         device_type:
           type: string
       example:
-        device_name: device-A1
-        device_id: 91601de6-6e93-11ed-a1eb-0242ac120002
-        device_type: Server
-        device_category: Network
+        - device_name: device-A1
+          device_id: 91601de6-6e93-11ed-a1eb-0242ac120002
+          device_type: Server
+          device_category: Network
+
+    DeviceArray:
+      required:
+        - device_id
+        - device_name
+      type: array
+      items:
+        type: object
+        properties:
+          device_id:
+            type: string
+          device_name:
+            type: string
+          device_category:
+            type: string
+          device_type:
+            type: string
+        example:
+          - device_name: device-A1
+            device_id: 91601de6-6e93-11ed-a1eb-0242ac120002
+            device_type: Server
+            device_category: Network
+          - device_name: dev-2
+            device_id: 91eweqweqwe601de6-6e93-11ed-a1eb-0242ac120002
+            device_type: Router
+            device_category: Network
+      description: List of devices
+
     Error:
       type: object
       properties:
@@ -203,15 +382,17 @@ components:
         offset:
           type: string
       example:
-        errNum: "404"
-        message: Error example app not work...
-        offset: line 10022
+        errNum: '404'
+        message: 'Error example app not work...'
+        offset: 'line 10022'
+      description: Universal Oracle error logs from database
+
     Log:
-      required:
-      - date
-      - id
-      - message
       type: object
+      required:
+        - id
+        - date
+        - message
       properties:
         id:
           type: string
@@ -223,31 +404,33 @@ components:
           type: string
           description: Log message
       example:
-        id: "102"
-        date: 2023-03-12 14:00
-        message: Meaasge in log
+        id: '102'
+        date: '2023-03-12 14:00'
+        message: 'Meaasge in log'
+      description: Save information about application upsage
+
   responses:
-    "200":
+    '200':
       description: OK
-    "400":
+    '400':
       description: Bad request. User ID must be an integer and larger than 0.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    "401":
+    '401':
       description: Authorization information is missing or invalid.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    "404":
-      description: A user with the specified ID was not found.
+    '404':
+      description: Not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    "5XX":
+    5XX:
       description: Unexpected error
       content:
         application/json:

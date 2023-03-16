@@ -21,7 +21,7 @@ exports.deviceDELETE = function (deviceId) {
  * deviceId String Parameter deviceId is string uuid
  * returns Device
  **/
-exports.deviceGET = function (deviceId) {
+exports.deviceGET = function (body) {
   return new Promise(function (resolve, reject) {
     let prompt = '[DefaultService.deviceGET]'
     var result = find(body)
