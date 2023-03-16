@@ -27,7 +27,17 @@ open http://localhost:8080/docs
 
 This project leverages the mega-awesome [swagger-tools](https://github.com/apigee-127/swagger-tools) middleware which does most all the work.
 
-### Setup Database password
+### Swagger
+
+1. Make backup `npm run swagger:backup-before-generate` --> `cp -v ./src/service/* ./backup`
+2. Update jars `swagger:get-jars`
+3. Generate api by docker `swagger:v3-docker-generate`
+4. Edit openapi by swagger editor: `swagger:v3-editor` and `swagger:v3-editor-open`
+5. Generate api by jars `swagger:v3-generate`
+
+### Setup Database
+
+#### Set password
 
 ```bash
 # call shell
