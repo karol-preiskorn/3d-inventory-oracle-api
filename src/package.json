@@ -1,13 +1,13 @@
 {
-  "name": "api-for-ultimainventory",
+  "name": "3d-inventory-oracle-api",
   "version": "1.0.2",
-  "description": "Run CRUD od Device object on Node Express.",
+  "description": "Run 3d-inventory-oracle-api",
   "main": "index.js",
   "scripts": {
     "api-install": "npm install",
     "api-update-upgrade": "npm update && npm upgrade",
     "npm-audit-fix": "npm audit fix --force",
-    "nodemon": " nodemon --ext yaml,js,mjs,json,rest,ts --experimental-specifier-resolution=node ./index.js"
+    "nodemon": "nodemon --ext yaml,js,mjs,json,rest,ts --experimental-specifier-resolution=node ./index.js"
   },
   "keywords": [
     "swagger",
