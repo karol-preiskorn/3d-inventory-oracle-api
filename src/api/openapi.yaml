@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: API for project 3d-inventory
   description: Run CRUD od 3d-inventory data model.
-  version: 1.0.5
+  version: 2.0.1
 servers:
 - url: https://virtserver.swaggerhub.com/karol-preiskorn/ultima-rest/1.0.3
   description: SwaggerHub API Auto Mocking
