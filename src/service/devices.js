@@ -4,7 +4,6 @@
  * Used by:
  * Dependency:
  *
- * HISTORY:
  * Date        By     Comments
  * ----------  -----  ---------------------------------------------------------
  * 2022-12-03	C2RLO	 Add categories and types
@@ -70,16 +69,9 @@ const datatabase = require('./database.js')
 
 const baseQuery = `SELECT device_id, device_name, device_category, device_type FROM devices`
 
-exports.attributes_typesGET = function () {
-  return new Promise(function (resolve, _reject) {
-    resolve()
-  })
-}
-
 exports.find = function (context) {
   return new Promise(function (resolve, reject) {
     let prompt = '[device.find]'
-    let body = context.body
     //console.log("👀", prompt, " context.body: ", body)
     let query = baseQuery
     let binds = ''

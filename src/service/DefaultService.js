@@ -1,8 +1,8 @@
 'use strict'
+const { find, create } = require('./devices.js')
 
 /**
- * Server heartbeat operation. Get information about devices attributes.
- * This operation shows how to override the global security defined above, as we want to open it up for all users.
+ * Devices attributes
  *
  * no response value expected for this operation
  **/
@@ -14,7 +14,7 @@ exports.attributesGET = function () {
 
 /**
  * Server heartbeat operation. Get information about devices attributes types.
- * This operation shows how to override the global security defined above, as we want to open it up for all users.
+ * Dictionary attributes types of specific type of device.
  *
  * no response value expected for this operation
  **/
@@ -26,7 +26,7 @@ exports.attributes_typesGET = function () {
 
 /**
  * Server heartbeat operation. Get information about connection between Devices.
- * This operation shows how to override the global security defined above, as we want to open it up for all users.
+ * Connection between devices
  *
  * no response value expected for this operation
  **/
@@ -37,8 +37,8 @@ exports.connectionsGET = function () {
 }
 
 /**
- * Insert new device
- * Create device.
+ * Delete device
+ * Delete device.
  *
  * no response value expected for this operation
  **/
@@ -49,67 +49,73 @@ exports.deviceDELETE = function () {
 }
 
 /**
- * Get Device Id
- * Get information about devices.
+ * Get devices
+ * Get list devices.
  *
  * returns Device
  **/
-exports.deviceGET = function () {
-  return new Promise(function (resolve, reject) {
-    var examples = {}
-    examples['application/json'] = {
-      device_name: 'device-A1',
-      device_id: '91601de6-6e93-11ed-a1eb-0242ac120002',
-      device_type: 'Server',
-      device_category: 'Network',
-    }
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]])
+exports.deviceGET = function (body) {
+  return new Promise(async function (resolve, reject) {
+    let prompt = '[DefaultService.deviceGET]'
+    var result = await find(body)
+    if (Object.keys(result).length > 0) {
+      console.log('👀', prompt, ' result: ', result.rows)
+      resolve(result)
     } else {
-      resolve()
+      console.log('👀', prompt, ' reject: ', result)
+      resolve(reject)
     }
   })
 }
 
 /**
- * Insert new device
- * Create device.
+ * Create new device
+ * Insert new device.
  *
- * body Device
+ * body Device  (optional)
  * returns Device
  **/
 exports.devicePOST = function (body) {
   return new Promise(function (resolve, reject) {
+    try {
+      console.log('✅ Before devicePOST: ', body)
+      const result = create(body)
+      console.log('✅ Result in devicePOST: ', result)
+      resolve(result)
+    } catch (err) {
+      console.log('🔥 Error in devicePOST: ', err)
+      reject(err)
+    }
+  })
+}
+
+/**
+ * Update device
+ * Update existing device.
+ *
+ * body Device  (optional)
+ * returns Device
+ **/
+exports.devicePUT = function (body) {
+  return new Promise(function (resolve, reject) {
     var examples = {}
     examples['application/json'] = {
-      device_name: 'device-A1',
       device_id: '91601de6-6e93-11ed-a1eb-0242ac120002',
-      device_type: 'Server',
+      device_name: 'device-A1',
       device_category: 'Network',
+      device_type: 'Server',
     }
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]])
     } else {
       resolve()
     }
-  })
-}
-
-/**
- * Insert new device
- * Create device.
- *
- * no response value expected for this operation
- **/
-exports.devicePUT = function () {
-  return new Promise(function (resolve, reject) {
-    resolve()
   })
 }
 
 /**
  * Delete log
- * Delete all or specyfic id log.
+ * Delete all or specific id log.
  *
  * no response value expected for this operation
  **/
@@ -131,7 +137,7 @@ exports.logGET = function () {
     examples['application/json'] = {
       id: '102',
       date: '2023-03-12 14:00',
-      message: 'Meaasge in log',
+      message: 'Message in log',
     }
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]])
@@ -154,7 +160,7 @@ exports.logPOST = function (body) {
     examples['application/json'] = {
       id: '102',
       date: '2023-03-12 14:00',
-      message: 'Meaasge in log',
+      message: 'Message in log',
     }
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]])
@@ -168,10 +174,20 @@ exports.logPOST = function (body) {
  * Update new log
  * Update log record.
  *
- * no response value expected for this operation
+ * returns Log
  **/
 exports.logPUT = function () {
   return new Promise(function (resolve, reject) {
-    resolve()
+    var examples = {}
+    examples['application/json'] = {
+      id: '102',
+      date: '2023-03-12 14:00',
+      message: 'Message in log',
+    }
+    if (Object.keys(examples).length > 0) {
+      resolve(examples[Object.keys(examples)[0]])
+    } else {
+      resolve()
+    }
   })
 }

@@ -1,9 +1,10 @@
 ﻿# TODO: fix device POST with seting from body
 # TODO: fix device GET
 
-### create device
 
-POST http://localhost:3000/device HTTP/1.1
+### get devices
+
+GET http://localhost:8080/device HTTP/1.1
 content-type: application/json
 
 {
@@ -13,21 +14,39 @@ content-type: application/json
     "device_type": "Racks"
 }
 
-### get devices
 
-GET http://localhost:3000/device/sample38 HTTP/1.1
+### post device
+
+POST http://localhost:8080/device HTTP/1.1
 content-type: application/json
 
 {
+    "device_id": "sample45",
+    "device_name": "device-name-a1",
+    "device_category": "Server",
+    "device_type": "Racks"
 }
+
+### post device
+
+PUT http://localhost:8080/device HTTP/1.1
+content-type: application/json
+
+{
+    "device_id": "sample3",
+    "device_name": "device-name-a1",
+    "device_category": "Server",
+    "device_type": "Racks"
+}
+
 
 ### get request selected devices
 
-GET http://localhost:8080/device/A-1 HTTP/1.1
+GET http://localhost:8080/device HTTP/1.1
 content-type: application/json
 
 {
-    "device_id": "tall_turquoise_sheep"
+
 }
 
 ### get request selected context
@@ -39,6 +58,23 @@ content-type: application/json
     "device_name": "tall_turquoise_sheep"
 }
 
+### get request selected context
+
+GET http://localhost:8080/log HTTP/1.1
+content-type: application/json
+
+{
+    "device_name": "tall_turquoise_sheep"
+}
+
+###
+
+PUT http://localhost:8080/log HTTP/1.1
+content-type: application/json
+
+{
+    "device_name": "tall_turquoise_sheep"
+}
 
 
 

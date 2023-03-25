@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prestart": "npm install",
-    "start": "node index.js",
-    "nodemon": "nodemon --ext yaml,js,mjs,json --experimental-specifier-resolution=node index.js"
+    "start": "node index.js"
   },
   "keywords": [
     "swagger"
@@ -15,12 +14,9 @@
   "private": true,
   "dependencies": {
     "connect": "^3.2.0",
-    "dotenv": "^16.0.3",
     "eslint": "^8.36.0",
     "js-yaml": "^3.3.0",
-    "nodemon": "^2.0.21",
     "oas3-tools": "^2.2.3",
-    "oracledb": "^5.5.0",
-    "unique-names-generator": "^4.7.1"
+    "oracledb": "^5.5.0"
   }
 }
