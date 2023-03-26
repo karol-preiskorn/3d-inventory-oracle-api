@@ -20,7 +20,7 @@
     "lint:docs": "documentation build src/index.js src/service/** src/controllers/** src/api/** --github -o docs/index.html",
     "lint:js": "eslint --ignore-path .gitignore --config .eslintrc.json src/**/*.js",
     "lint:prettier": "prettier --write --ignore-unknown --ignore-path .prettierignore",
-    "nodemon": "nodemon --ext yaml,js,mjs,json --experimental-specifier-resolution=node src/index.js",
+    "nodemon": "cd src && nodemon --ext yaml,js,mjs,json --experimental-specifier-resolution=node index.js",
     "preliminary": "npm install && husky install",
     "prettier": "prettier --write --ignore-unknown --ignore-path .prettierignore",
     "swagger": "npm backup-before-generate-swagger && npm ",

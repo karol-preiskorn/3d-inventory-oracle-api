@@ -18,7 +18,7 @@
     "dotenv": "^16.0.3",
     "eslint": "^8.36.0",
     "js-yaml": "^3.3.0",
-    "nodemon": "^2.0.21",
+    "nodemon": "^2.0.22",
     "oas3-tools": "^2.2.3",
     "oracledb": "^5.5.0",
     "unique-names-generator": "^4.7.1"
