@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "chalk": "^5.2.0",
-    "documentation": "^14.0.1"
+    "documentation": "^14.0.2"
   },
   "devDependencies": {
     "@types/chalk": "^2.2.0",
