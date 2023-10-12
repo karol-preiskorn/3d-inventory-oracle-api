@@ -137,8 +137,5 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-devcontainers-5e0d7a9d-3d1d-4230-bb2b-3ea82905236b1678694788158
-devcontainers-23337f64-0b37-4f61-aa3f-ddc998272b321678694742194
-devcontainers-a60113cc-3db4-4503-82ef-0f464d444b7d1678694707221
-devcontainers-b11a79b2-9612-46c0-8771-3cb85de693a11678694754695
 .X11-unix
+

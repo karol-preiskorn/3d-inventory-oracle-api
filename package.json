@@ -12,17 +12,25 @@
     "db:19g:create-user": "sqlplus sys/babilon5@${npm_package_config_url}:1521/orclpdb1 as sysdba @sql/create-user.sql",
     "db:21g:create-schema": "sqlplus REST/babilon5@$npm_package_config_url:1521/XEPDB1 @sql/create-schema.sql",
     "db:21g:create-user": "sqlplus sys/babilon5@$npm_package_config_url:1521/XEPDB1 as sysdba @sql/create-user.sql",
+
     "db:21g:docker-db": "docker run -d -p 1521:1521 -e ORACLE_PASSWORD=babilon5 -v oracle-volume:/opt/oracle/oradata gvenzl/oracle-xe:21.3.0-faststart",
+    "db:21g:podman-db": "podman run -d -p 1521:1521 -e ORACLE_PASSWORD=babilon5 -v oracle-volume:/opt/oracle/oradata gvenzl/oracle-xe:21.3.0-faststart",
+    "db:21g:podman-pull": "podman pull docker.io/gvenzl/oracle-xe:21.3.0-faststart",
+
     "db:21g:run": "npm run db:21g:set-password && npm run db:21g:create-user && npm run db:21g:create-schema",
-    "db:21g:set-password": "docker exec -d `docker ps --format \"{{.ID}}\" -f ancestor=gvenzl/oracle-xe:21.3.0-faststart` ./resetPassword babilon5",
+    "db:21g:set-password": "podman exec -d `podman ps --format \"{{.ID}}\" -f ancestor=docker.io/gvenzl/oracle-xe:21.3.0-faststart` ./resetPassword babilon5",
+
     "fixJSLinting": "eslint --fix app/**/*.js",
     "install:core": "npm install",
+
     "lint:docs": "documentation build src/index.js src/service/** src/controllers/** src/api/** --github -o docs/index.html",
     "lint:js": "eslint --ignore-path .gitignore --config .eslintrc.json src/**/*.js",
     "lint:prettier": "prettier --write --ignore-unknown --ignore-path .prettierignore",
+
     "nodemon": "cd src && nodemon --ext yaml,js,mjs,json --experimental-specifier-resolution=node index.js",
     "preliminary": "npm install && husky install",
     "prettier": "prettier --write --ignore-unknown --ignore-path .prettierignore",
+
     "swagger": "npm backup-before-generate-swagger && npm ",
     "swagger:backup-before-generate": "cp -v ./src/service/* ./backup",
     "swagger:clean": "[ -d src ] && rm -r src",
@@ -42,15 +50,15 @@
     "url": "172.17.0.2"
   },
   "dependencies": {
-    "chalk": "^5.2.0",
+    "chalk": "^5.3.0",
     "documentation": "^14.0.2"
   },
   "devDependencies": {
     "@types/chalk": "^2.2.0",
     "@types/open": "^6.2.1",
     "husky": "^8.0.3",
-    "lint-staged": "^13.2.0",
+    "lint-staged": "^14.0.1",
     "open": "^9.1.0",
-    "prettier": "2.8.7"
+    "prettier": "3.0.3"
   }
 }
