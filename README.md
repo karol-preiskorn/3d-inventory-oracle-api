@@ -9,7 +9,7 @@
       3. [Setup Database](#setup-database)
          1. [Set password](#set-password)
          2. [Use image of DB](#use-image-of-db)
-   2. [Oracle](#oracle)
+   2. [Run Oracle DB in container](#run-oracle-db-in-container)
       1. [Shell](#shell)
       2. [Podman](#podman)
          1. [Create test database and test user](#create-test-database-and-test-user)
@@ -84,16 +84,23 @@ docker run -d -p 1521:1521 -e ORACLE_PASSWORD=babilon5 \
 ```
 
 
-## Oracle
+## Run Oracle DB in container
+
 ### Shell
+
 ```bash
+podman run -d -p 1521:1521 -e ORACLE_PASSWORD=3dinventory docker://gvenzl/oracle-free
 sqlplus sys/LetsTest1@localhost/XE as sysdba
 ```
+
 ### Podman
+
 ```bash
 podman exec -ti oracle-xe sqlplus sys/LetsTest1@localhost/XE as sysdba
 ```
+
 #### Create test database and test user
+
 ```sql
 CREATE PLUGGABLE DATABASE test ADMIN USER test IDENTIFIED BY LetsTest1 FILE_NAME_CONVERT=('pdbseed','test');
 ALTER PLUGGABLE DATABASE test OPEN;
