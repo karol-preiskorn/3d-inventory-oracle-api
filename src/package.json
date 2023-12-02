@@ -6,7 +6,7 @@
   "keywords": [
     "swagger"
   ],
-  "license": "Unlicense",
+  "license": "ultimasolution.pl",
   "main": "index.js",
   "scripts": {
     "nodemon": "nodemon --ext yaml,js,mjs,json --experimental-specifier-resolution=node index.js",
