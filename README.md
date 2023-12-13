@@ -14,7 +14,7 @@
       2. [Podman](#podman)
          1. [Create test database and test user](#create-test-database-and-test-user)
 
-[![wakatime](https://wakatime.com/badge/user/3bbeedbe-0c6a-4a01-b3cd-a85d319a03bf/project/018c29b5-69aa-44a9-823a-51170ee4eafb.svg)](https://wakatime.com/badge/user/3bbeedbe-0c6a-4a01-b3cd-a85d319a03bf/project/018c29b5-69aa-44a9-823a-51170ee4eafb)
+[![wakatime](https://wakatime.com/badge/user/3bbeedbe-0c6a-4a01-b3cd-a85d319a03bf/project/018c3018-efe9-4b33-a2ed-9fafa58710f7.svg)](https://wakatime.com/badge/user/3bbeedbe-0c6a-4a01-b3cd-a85d319a03bf/project/018c3018-efe9-4b33-a2ed-9fafa58710f7)
 [![GitHub latest commit](https://badgen.net/github/last-commit/karol-preiskorn/3d-inventory-oracle-api)](https://GitHub.com/karol-preiskorn/3d-inventory-oracle-api/commit/)
 [![GitHub stars](https://img.shields.io/github/stars/karol-preiskorn/3d-inventory-oracle-api.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/karol-preiskorn/3d-inventory-oracle-api/stargazers/)
 [![GitHub issues](https://img.shields.io/github/issues/karol-preiskorn/3d-inventory-oracle-api.svg)](https://GitHub.com/karol-preiskorn/3d-inventory-oracle-api/issues/)
