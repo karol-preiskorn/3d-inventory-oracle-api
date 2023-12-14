@@ -24,6 +24,9 @@
 [![GitHub license](https://badgen.net/github/license/karol-preiskorn/3d-inventory-oracle-api)](https://github.com/karol-preiskorn/3d-inventory-oracle-api/blob/master/LICENSE)
 
 Part of [3d-inventory project](https://github.com/users/karol-preiskorn/projects/2/views/2).
+- [3d-inventory-angular-ui](https://GitHub.com/karol-preiskorn/3d-inventory-angular-ui/)
+- [3d-inventory-oracle-api](https://GitHub.com/karol-preiskorn/3d-inventory-oracle-api/)
+- [3d-inventory-mongo-api](https://GitHub.com/karol-preiskorn/3d-inventory-mongo-api/)
 
 ## Overview
 
