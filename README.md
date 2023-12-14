@@ -23,7 +23,7 @@
 [![Npm](https://badgen.net/badge/icon/npm?icon=npm&label)](https://https://npmjs.com/)
 [![GitHub license](https://badgen.net/github/license/karol-preiskorn/3d-inventory-oracle-api)](https://github.com/karol-preiskorn/3d-inventory-oracle-api/blob/master/LICENSE)
 
-Part of 3d-inventory project
+Part of (3d-inventory project)[https://github.com/users/karol-preiskorn/projects/2/views/2].
 
 ## Overview
 
