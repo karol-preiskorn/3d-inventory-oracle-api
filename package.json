@@ -1,85 +1,85 @@
 {
-  "name": "3d-inventory-oracle-api",
-  "version": "2.0.6",
-  "private": false,
-  "description": "Run Oracle DB and generate Swagger API schema. API operation for ultimaInventory schema by Node Express server.",
-  "license": "ultimasolution.pl",
-  "type": "commonjs",
-  "main": "",
-  "scripts": {
-    "42": "podman run -e SCAN_TOKEN=scan_dd814bc9-6a91-4348-a84e-de46ad3664a8 42crunch/scand-agent:latest",
-    "db:19g:create-schema": "sqlplus REST/babilon5@$npm_package_config_url:1521/orclpdb1 @sql/create-schema.sql",
-    "db:19g:create-user": "sqlplus sys/babilon5@${npm_package_config_url}:1521/orclpdb1 as sysdba @sql/create-user.sql",
-    "db:21g:create-schema": "sqlplus REST/babilon5@$npm_package_config_url:1521/XEPDB1 @sql/create-schema.sql",
-    "db:21g:create-user": "sqlplus sys/babilon5@$npm_package_config_url:1521/XEPDB1 as sysdba @sql/create-user.sql",
-    "db:21g:podman-db": "podman run -d -p 1521:1521 -e ORACLE_PASSWORD=babilon5 -v oracle-volume:/opt/oracle/oradata gvenzl/oracle-xe:21.3.0-faststart",
-    "db:21g:run": "npm run db:21g:set-password && npm run db:21g:create-user && npm run db:21g:create-schema",
-    "db:21g:set-password": "podman exec -d `podman ps --format \"{{.ID}}\" -f ancestor=podman.io/gvenzl/oracle-xe:21.3.0-faststart` ./resetPassword babilon5",
-    "db:23g:db": "podman run -d -p 1521:1521 -e ORACLE_PASSWORD=3dinventory podman://gvenzl/oracle-free",
-    "db:23g:schema": "podman run -ti --rm oracle/instantclient:latest sqlplus sys/3dinventory@example.com/orclpdb1",
-    "db:23g:sqlplus": "podman pull container-registry.oracle.com/database/instantclient:latest",
-    "fixJSLinting": "eslint --fix app/**/*.js",
-    "install:core": "npm install",
-    "lint:docs": "documentation build src/index.js src/service/** src/controllers/** src/api/** --github -o docs/index.html",
-    "lint:js": "eslint --ignore-path .gitignore --config .eslintrc.json src/**/*.js",
-    "lint:prettier": "prettier --write --ignore-unknown --ignore-path .prettierignore",
-    "nodemon": "cd src && nodemon --ext yaml,js,mjs,json --experimental-specifier-resolution=node index.js",
-    "preliminary": "npm install && husky install",
-    "prettier": "prettier --write --ignore-unknown --ignore-path .prettierignore",
-    "swagger": "npm backup-before-generate-swagger && npm ",
-    "swagger:backup-before-generate": "node backup/make-backup.js",
-    "swagger:clean": "[ -d src ] && rm -r src",
-    "swagger:editor:generate": "pwd && java -jar api/target/jars/swagger-codegen-cli.jar generate -i api/openapi.yaml -l nodejs-server -o src",
-    "swagger:editor:open": "firefox http://127.0.0.1",
-    "swagger:editor:podman-generate": "podman run --rm -v ${PWD}:/local docker:swaggerapi/swagger-codegen-cli-v3 generate -i /local/api/openapi.yaml -l nodejs-server -o /local/src",
-    "swagger:editor:pull": "podman pull swaggerapi/swagger-editor",
-    "swagger:editor:run": "podman run -d -p 80:8080 -v ${PWD}:/tmp -e SWAGGER_FILE=/tmp/api/openapi.yaml swaggerapi/swagger-editor",
-    "swagger:get-jars": "mvn package -f api/pom.xml",
-    "swagger:install-dependences": "cd src && npm i oracledb eslint nodemon unique-names-generator dotenv",
-    "swagger:nodemon": "cat package.json | jq '.scripts += {\"nodemon\": \"nodemon --ext yaml,js,mjs,json --experimental-specifier-resolution=node src/index.js\"}' > package.tmp && mv -f package.tmp package.json",
-    "update": "ncu -u && npm update && npm upgrade"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,css,md}": "prettier --write prettier --ignore-unknown --ignore-path .prettierignore"
-  },
-  "config": {
-    "password": "3dinventory",
-    "port": "1521",
-    "url": "172.17.0.2"
-  },
-  "dependencies": {
-    "@types/fs-extra": "^11.0.4",
-    "@types/moment": "^2.13.0",
-    "@types/node": "^20.10.0",
-    "@types/winston": "^2.4.4",
-    "chalk": "^5.3.0",
-    "fs": "^0.0.1-security",
-    "fs-extra": "^11.1.1",
-    "moment": "^2.29.4",
-    "winston": "^3.11.0"
-  },
-  "devDependencies": {
-    "@types/chalk": "^2.2.0",
-    "@types/open": "^6.2.1",
-    "documentation": "^14.0.2",
-    "eslint": "^8.54.0",
-    "eslint-config-prettier": "9.0.0",
-    "eslint-config-standard": "17.1.0",
-    "eslint-plugin-import": "2.29.0",
-    "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-standard": "5.0.0",
-    "husky": "^8.0.3",
-    "lint-staged": "^15.1.0",
-    "npm-check-updates": "^16.14.11",
-    "open": "^9.1.0",
-    "prettier": "3.1.0"
-  },
-  "engines": {
-    "node": ">=21.0.0"
-  }
+	"name": "3d-inventory-oracle-api",
+	"version": "2.0.7",
+	"private": false,
+	"description": "Run Oracle DB and generate Swagger API schema. API operation for ultimaInventory schema by Node Express server.",
+	"license": "ultimasolution.pl",
+	"type": "commonjs",
+	"main": "",
+	"scripts": {
+		"42": "podman run -e SCAN_TOKEN=scan_dd814bc9-6a91-4348-a84e-de46ad3664a8 42crunch/scand-agent:latest",
+		"db:19g:create-schema": "sqlplus REST/babilon5@$npm_package_config_url:1521/orclpdb1 @sql/create-schema.sql",
+		"db:19g:create-user": "sqlplus sys/babilon5@${npm_package_config_url}:1521/orclpdb1 as sysdba @sql/create-user.sql",
+		"db:21g:create-schema": "sqlplus REST/babilon5@$npm_package_config_url:1521/XEPDB1 @sql/create-schema.sql",
+		"db:21g:create-user": "sqlplus sys/babilon5@$npm_package_config_url:1521/XEPDB1 as sysdba @sql/create-user.sql",
+		"db:21g:podman-db": "podman run -d -p 1521:1521 -e ORACLE_PASSWORD=babilon5 -v oracle-volume:/opt/oracle/oradata gvenzl/oracle-xe:21.3.0-faststart",
+		"db:21g:run": "npm run db:21g:set-password && npm run db:21g:create-user && npm run db:21g:create-schema",
+		"db:21g:set-password": "podman exec -d `podman ps --format \"{{.ID}}\" -f ancestor=podman.io/gvenzl/oracle-xe:21.3.0-faststart` ./resetPassword babilon5",
+		"db:23g:db": "podman run -d -p 1521:1521 -e ORACLE_PASSWORD=3dinventory podman://gvenzl/oracle-free",
+		"db:23g:schema": "podman run -ti --rm oracle/instantclient:latest sqlplus sys/3dinventory@example.com/orclpdb1",
+		"db:23g:sqlplus": "podman pull container-registry.oracle.com/database/instantclient:latest",
+		"fixJSLinting": "eslint --fix app/**/*.js",
+		"install:core": "npm install",
+		"lint:docs": "documentation build src/index.js src/service/** src/controllers/** src/api/** --github -o docs/index.html",
+		"lint:js": "eslint --ignore-path .gitignore --config .eslintrc.json src/**/*.js",
+		"lint:prettier": "prettier --write --ignore-unknown --ignore-path .prettierignore",
+		"nodemon": "cd src && nodemon --ext yaml,js,mjs,json --experimental-specifier-resolution=node index.js",
+		"preliminary": "npm install && husky install",
+		"prettier": "prettier --write --ignore-unknown --ignore-path .prettierignore",
+		"swagger": "npm backup-before-generate-swagger && npm ",
+		"swagger:backup-before-generate": "node backup/make-backup.js",
+		"swagger:clean": "[ -d src ] && rm -r src",
+		"swagger:editor:generate": "pwd && java -jar api/target/jars/swagger-codegen-cli.jar generate -i api/openapi.yaml -l nodejs-server -o src",
+		"swagger:editor:open": "firefox http://127.0.0.1",
+		"swagger:editor:podman-generate": "podman run --rm -v ${PWD}:/local docker:swaggerapi/swagger-codegen-cli-v3 generate -i /local/api/openapi.yaml -l nodejs-server -o /local/src",
+		"swagger:editor:pull": "podman pull swaggerapi/swagger-editor",
+		"swagger:editor:run": "podman run -d -p 80:8080 -v ${PWD}:/tmp -e SWAGGER_FILE=/tmp/api/openapi.yaml swaggerapi/swagger-editor",
+		"swagger:get-jars": "mvn package -f api/pom.xml",
+		"swagger:install-dependences": "cd src && npm i oracledb eslint nodemon unique-names-generator dotenv",
+		"swagger:nodemon": "cat package.json | jq '.scripts += {\"nodemon\": \"nodemon --ext yaml,js,mjs,json --experimental-specifier-resolution=node src/index.js\"}' > package.tmp && mv -f package.tmp package.json",
+		"update": "ncu -u && npm update && npm upgrade"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.{js,css,md}": "prettier --write prettier --ignore-unknown --ignore-path .prettierignore"
+	},
+	"config": {
+		"password": "3dinventory",
+		"port": "1521",
+		"url": "172.17.0.2"
+	},
+	"dependencies": {
+		"@types/fs-extra": "^11.0.4",
+		"@types/moment": "^2.13.0",
+		"@types/node": "^20.10.0",
+		"@types/winston": "^2.4.4",
+		"chalk": "^5.3.0",
+		"fs": "^0.0.1-security",
+		"fs-extra": "^11.1.1",
+		"moment": "^2.29.4",
+		"winston": "^3.11.0"
+	},
+	"devDependencies": {
+		"@types/chalk": "^2.2.0",
+		"@types/open": "^6.2.1",
+		"documentation": "^14.0.2",
+		"eslint": "^8.54.0",
+		"eslint-config-prettier": "9.0.0",
+		"eslint-config-standard": "17.1.0",
+		"eslint-plugin-import": "2.29.0",
+		"eslint-plugin-node": "11.1.0",
+		"eslint-plugin-standard": "5.0.0",
+		"husky": "^8.0.3",
+		"lint-staged": "^15.1.0",
+		"npm-check-updates": "^16.14.11",
+		"open": "^9.1.0",
+		"prettier": "3.1.0"
+	},
+	"engines": {
+		"node": ">=21.0.0"
+	}
 }
