@@ -1,18 +1,14 @@
 # 3d-inventory-oracle-api
 
-1. [3d-inventory-oracle-api](#3d-inventory-oracle-api)
-   1. [Overview](#overview)
-      1. [Running the server](#running-the-server)
-      2. [Swagger](#swagger)
-         1. [OpenAPI definition 3.0.3](#openapi-definition-303)
-         2. [NPM run](#npm-run)
-      3. [Setup Database](#setup-database)
-         1. [Set password](#set-password)
-         2. [Use image of DB](#use-image-of-db)
-   2. [Run Oracle DB in container](#run-oracle-db-in-container)
-      1. [Shell](#shell)
-      2. [Podman](#podman)
-         1. [Create test database and test user](#create-test-database-and-test-user)
+- [3d-inventory-oracle-api](#3d-inventory-oracle-api)
+  - [Overview](#overview)
+    - [Running the server](#running-the-server)
+    - [Swagger](#swagger)
+    - [Setup Database](#setup-database)
+  - [Run Oracle DB in container](#run-oracle-db-in-container)
+    - [Shell](#shell)
+    - [Podman](#podman)
+  - [Test JSON structure in 19.3g](#test-json-structure-in-193g)
 
 [![wakatime](https://wakatime.com/badge/user/3bbeedbe-0c6a-4a01-b3cd-a85d319a03bf/project/018c3018-efe9-4b33-a2ed-9fafa58710f7.svg)](https://wakatime.com/badge/user/3bbeedbe-0c6a-4a01-b3cd-a85d319a03bf/project/018c3018-efe9-4b33-a2ed-9fafa58710f7)
 [![GitHub latest commit](https://badgen.net/github/last-commit/karol-preiskorn/3d-inventory-oracle-api)](https://GitHub.com/karol-preiskorn/3d-inventory-oracle-api/commit/)
@@ -24,6 +20,7 @@
 [![GitHub license](https://badgen.net/github/license/karol-preiskorn/3d-inventory-oracle-api)](https://github.com/karol-preiskorn/3d-inventory-oracle-api/blob/master/LICENSE)
 
 Part of [3d-inventory project](https://github.com/users/karol-preiskorn/projects/2/views/2).
+
 - [3d-inventory-angular-ui](https://GitHub.com/karol-preiskorn/3d-inventory-angular-ui/)
 - [3d-inventory-oracle-api](https://GitHub.com/karol-preiskorn/3d-inventory-oracle-api/)
 - [3d-inventory-mongo-api](https://GitHub.com/karol-preiskorn/3d-inventory-mongo-api/)
@@ -70,6 +67,23 @@ https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md#compone
 
 ### Setup Database
 
+When run in `podman` db create at `172.17.0.2`. To connect db i use Oracle `SQLcl`.
+
+After your service is created, you can connect to it via the following properties:
+
+    Hostname:
+        oracle (from within another container)
+        localhost or 127.0.0.1 (from the host directly)
+    Port: 1521
+    Service name: FREEPDB1
+    Database App User: my_user
+    Database App Password: password_i_should_change
+
+
+```bash
+$ ./sql sys/3dinventory@127.0.0.1:1521/FREEPDB1 as sysdba
+```
+
 #### Set password
 
 ```bash
@@ -79,7 +93,7 @@ docker exec -it 5c6a4a0c10638e88b0d1a5e35867ed908b78d8dc7fae4df804fc8cbcf1d78921
 docker exec -d 5c6a4a0c1063 ./setPassword.sh babilon5
 # run some other command in container like sql scripts
 docker exec -ti 5c6a4a0c1063 sh -c "echo a && echo b"
-sqlplus sys/babilon5@172.17.0.2:1521/orclpdb1 as sysdba
+sql sys/babilon5@172.17.0.2:1521/orclpdb1 as sysdba
 ```
 
 #### Use image of DB
@@ -93,7 +107,6 @@ docker run -d -p 1521:1521 -e ORACLE_PASSWORD=babilon5 \
            -v oracle-volume:/opt/oracle/oradata \
            gvenzl/oracle-xe:21.3.0-faststart
 ```
-
 
 ## Run Oracle DB in container
 
@@ -120,3 +133,9 @@ ALTER SESSION SET CONTAINER=test;
 GRANT CONNECT, RESOURCE, CREATE VIEW, UNLIMITED TABLESPACE TO test;
 exit;
 ```
+
+## Test JSON structure in 19.3g
+
+1. Create instance db from offical build: [19.3.0](
+https://github.com/oracle/docker-images/tree/main/OracleDatabase/SingleInstance/dockerfiles/19.3.0)
+2. 
