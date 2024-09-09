@@ -15,12 +15,14 @@
     "update": "ncu -u && npm update && npm upgrade"
   },
   "dependencies": {
+
     "connect": "^3.7.0",
     "dotenv": "^16.3.1",
     "eslint": "^9.0.0",
     "js-yaml": "^4.1.0",
     "nodemon": "^3.0.1",
     "npm-check-updates": "^16.14.6",
+
     "oas3-tools": "^2.2.3",
     "oracledb": "^6.2.0",
     "unique-names-generator": "^4.7.1"
