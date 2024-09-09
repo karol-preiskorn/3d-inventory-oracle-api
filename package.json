@@ -67,14 +67,16 @@
     "@types/chalk": "^2.2.0",
     "@types/open": "^6.2.1",
     "documentation": "^14.0.2",
-    "eslint": "^8.54.0",
+    "eslint": "^9.0.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-config-standard": "17.1.0",
     "eslint-plugin-import": "2.29.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-standard": "5.0.0",
     "husky": "^8.0.3",
-    "lint-staged": "^15.1.0",
+
+    "lint-staged": "^15.2.10",
+
     "npm-check-updates": "^16.14.11",
     "open": "^9.1.0",
     "prettier": "3.1.0"
