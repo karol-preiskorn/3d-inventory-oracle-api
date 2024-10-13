@@ -10,8 +10,5 @@
     "ecmaVersion": "latest"
   },
   "rules": {},
-  "ignorePatterns": [
-    "node_modules/**/*",
-    "src/node_modules/**/*"
-  ]
+  "ignorePatterns": ["node_modules/**/*", "src/node_modules/**/*"]
 }

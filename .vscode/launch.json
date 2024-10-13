@@ -9,7 +9,7 @@
       "type": "firefox",
       "request": "launch",
       "reAttach": true,
-      "file": "${workspaceFolder}/index.js",
+      "file": "${workspaceFolder}/index.js"
     },
     {
       "name": "Launch localhost",

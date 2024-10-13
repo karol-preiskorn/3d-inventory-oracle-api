@@ -79,7 +79,6 @@ After your service is created, you can connect to it via the following propertie
     Database App User: my_user
     Database App Password: password_i_should_change
 
-
 ```bash
 $ ./sql sys/3dinventory@127.0.0.1:1521/FREEPDB1 as sysdba
 ```
@@ -136,6 +135,5 @@ exit;
 
 ## Test JSON structure in 19.3g
 
-1. Create instance db from offical build: [19.3.0](
-https://github.com/oracle/docker-images/tree/main/OracleDatabase/SingleInstance/dockerfiles/19.3.0)
-2. 
+1. Create instance db from offical build: [19.3.0](https://github.com/oracle/docker-images/tree/main/OracleDatabase/SingleInstance/dockerfiles/19.3.0)
+2.

@@ -13,10 +13,8 @@ servers:
 paths:
   /device:
     get:
-      summary:
-        Get devices
-      description:
-        Get list devices.
+      summary: Get devices
+      description: Get list devices.
       operationId: deviceGET
       responses:
         '200':
@@ -33,10 +31,8 @@ paths:
                 $ref: '#/components/schemas/Device'
 
     put:
-      summary:
-        "Update device"
-      description:
-        Update existing device.
+      summary: 'Update device'
+      description: Update existing device.
       operationId: devicePUT
       requestBody:
         content:
@@ -102,10 +98,8 @@ paths:
 
   /log:
     get:
-      summary:
-        Get log from database
-      description:
-        Get all log.
+      summary: Get log from database
+      description: Get all log.
       operationId: logGET
       responses:
         '200':
@@ -135,10 +129,8 @@ paths:
                 $ref: '#/components/responses/5XX'
 
     put:
-      summary:
-        Update new log
-      description:
-        Update log record.
+      summary: Update new log
+      description: Update log record.
       operationId: logPUT
       responses:
         '200':
@@ -149,10 +141,8 @@ paths:
                 $ref: '#/components/schemas/Log'
 
     post:
-      summary:
-        Insert new log
-      description:
-        Create log.
+      summary: Insert new log
+      description: Create log.
       operationId: logPOST
       requestBody:
         content:
@@ -226,9 +216,7 @@ paths:
           description: OK
 
 components:
-
   schemas:
-
     Device:
       type: object
       required:

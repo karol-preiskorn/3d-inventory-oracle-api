@@ -1,11 +1,10 @@
 {
-  "cSpell.words": [
-    "expots",
-    "PDU",
-    "prestart",
-    "RLO",
-    "Rowid"
-  ],
+  "cSpell.words": ["expots", "PDU", "prestart", "RLO", "Rowid"],
   "openapi.dataDictionaryPreAuditFix": "always",
-  "java.configuration.updateBuildConfiguration": "automatic"
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#0C3337",
+    "titleBar.activeBackground": "#10474D",
+    "titleBar.activeForeground": "#F3FBFC"
+  }
 }
