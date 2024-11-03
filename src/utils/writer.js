@@ -25,8 +25,6 @@ var writeJson = (exports.writeJson = function (response, arg1, arg2) {
   }
   if (code && arg1) {
     payload = arg1
-  } else if (arg1) {
-    payload = arg1
   }
 
   if (!code) {

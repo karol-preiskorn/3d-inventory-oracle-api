@@ -17,14 +17,13 @@
   "dependencies": {
 
     "connect": "^3.7.0",
-    "dotenv": "^16.3.1",
-    "eslint": "^9.0.0",
+    "dotenv": "^16.4.5",
+    "eslint": "^9.14.0",
     "js-yaml": "^4.1.0",
-    "nodemon": "^3.0.1",
-    "npm-check-updates": "^16.14.6",
-
+    "nodemon": "^3.1.7",
+    "npm-check-updates": "^17.1.10",
     "oas3-tools": "^2.2.3",
-    "oracledb": "^6.2.0",
+    "oracledb": "^6.6.0",
     "unique-names-generator": "^4.7.1"
   }
 }

@@ -1,5 +1,14 @@
 {
-  "cSpell.words": ["expots", "PDU", "prestart", "RLO", "Rowid"],
+  "cSpell.words": [
+    "expots",
+    "gvenzl",
+    "orclpdb",
+    "PDU",
+    "prestart",
+    "RLO",
+    "Rowid",
+    "scand"
+  ],
   "openapi.dataDictionaryPreAuditFix": "always",
   "java.configuration.updateBuildConfiguration": "automatic",
   "workbench.colorCustomizations": {
