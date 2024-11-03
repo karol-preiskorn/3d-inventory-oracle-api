@@ -9,11 +9,4 @@
     "Rowid",
     "scand"
   ],
-  "openapi.dataDictionaryPreAuditFix": "always",
-  "java.configuration.updateBuildConfiguration": "automatic",
-  "workbench.colorCustomizations": {
-    "activityBar.background": "#0C3337",
-    "titleBar.activeBackground": "#10474D",
-    "titleBar.activeForeground": "#F3FBFC"
-  }
 }
