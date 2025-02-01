@@ -1,14 +1,14 @@
 # 3d-inventory-oracle-api
 
-- [3d-inventory-oracle-api](#3d-inventory-oracle-api)
-  - [Overview](#overview)
-    - [Running the server](#running-the-server)
-    - [Swagger](#swagger)
-    - [Setup Database](#setup-database)
-  - [Run Oracle DB in container](#run-oracle-db-in-container)
-    - [Shell](#shell)
-    - [Podman](#podman)
-  - [Test JSON structure in 19.3g](#test-json-structure-in-193g)
+1. [3d-inventory-oracle-api](#3d-inventory-oracle-api)
+   1. [Overview](#overview)
+      1. [Running the server](#running-the-server)
+      2. [Swagger](#swagger)
+      3. [Setup Database](#setup-database)
+   2. [Run Oracle DB in container](#run-oracle-db-in-container)
+      1. [Shell](#shell)
+      2. [Podman](#podman)
+   3. [Test JSON structure in 19.3g](#test-json-structure-in-193g)
 
 [![wakatime](https://wakatime.com/badge/user/3bbeedbe-0c6a-4a01-b3cd-a85d319a03bf/project/018c3018-efe9-4b33-a2ed-9fafa58710f7.svg)](https://wakatime.com/badge/user/3bbeedbe-0c6a-4a01-b3cd-a85d319a03bf/project/018c3018-efe9-4b33-a2ed-9fafa58710f7)
 [![GitHub latest commit](https://badgen.net/github/last-commit/karol-preiskorn/3d-inventory-oracle-api)](https://GitHub.com/karol-preiskorn/3d-inventory-oracle-api/commit/)
@@ -114,6 +114,16 @@ docker run -d -p 1521:1521 -e ORACLE_PASSWORD=babilon5 \
 ```bash
 podman run -d -p 1521:1521 -e ORACLE_PASSWORD=3dinventory docker://gvenzl/oracle-free
 sqlplus sys/LetsTest1@localhost/XE as sysdba
+```
+
+New Docker way:
+
+```bash
+docker create -it --name oracle23de -p 1521:1521 -p 5500:5500 -p 8082:8080 -p 8443:8443 -p 27017:27017 -e DBA_PWD=ConvergedDB_1234 -e USR_PWD=ConvergedDB_1234 -e DOCKER_HOST=NOHOSTNAME -v $HOME/orainstall:/orainstall oraclelinux:8
+
+docker start oracle23de
+
+docker exec -it oracle23de /bin/bash
 ```
 
 ### Podman
